@@ -57,8 +57,15 @@ Select rows all rows int the page versus all rows in the search.
 Value: string  
 Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
 
+**pos.showCashierLastSession**
+Value: true/false
+Show data from the last cash register session only in /admin/pos/list
+
 **billing.paymentAfterUseDate**  
 Value: true/false  
 Don't generate a payment when any line has useDate in the future. They payment will be saved as a payment on account.
 When the date comes and you try to pay again (with the partial or full payment on account) the payment will be generated.
 
+**pos.showCashierLastSession**
+Value: true/false
+Show data from the last cash register session only in /admin/pos/list
