@@ -14,6 +14,8 @@ Prevent making reservations on past dates
 Value: true/false  
 Allow anonymous reservations in admin
 
+-----
+
 **ebookings.membershipMode**  
 Value: true/false  
 Show the bookings view in membership mode.
@@ -21,6 +23,8 @@ Show the bookings view in membership mode.
 **ebookings.showPastHours**  
 Value: true/false  
 Show past hours when browsing the current day.
+
+-----
 
 **billing.preventPastChanges**  
 Value: true/false  
@@ -42,6 +46,17 @@ Automatically add a line as on credit when a client has onCredit enabled.
 Value: true/false  
 Require changePastUsedateSales permission to update sales with useDate in the past.
 
+**billing.requirePermissionToUpdatePastCreatedSales**  
+Value: true/false  
+Require changePastCreateDateSales permission to update sales with createDate in the past.
+
+**billing.paymentAfterUseDate**  
+Value: true/false  
+Don't generate a payment when any line has useDate in the future. They payment will be saved as a payment on account.
+When the date comes and you try to pay again (with the partial or full payment on account) the payment will be generated.
+
+-----
+
 **eshop.thankyouPage**  
 Value: a url  
 Plugin: consumer  
@@ -57,15 +72,12 @@ Select rows all rows int the page versus all rows in the search.
 Value: string  
 Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
 
-**pos.showCashierLastSession**
+-----
+
+**pos.showCashierLastSession**  
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list
 
-**billing.paymentAfterUseDate**  
-Value: true/false  
-Don't generate a payment when any line has useDate in the future. They payment will be saved as a payment on account.
-When the date comes and you try to pay again (with the partial or full payment on account) the payment will be generated.
-
-**pos.showCashierLastSession**
+**pos.showCashierLastSession**  
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list

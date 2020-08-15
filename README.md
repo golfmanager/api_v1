@@ -50,6 +50,7 @@ For example:
  - [Reservations](#reservations)
  - [Clients](#clients)
  - [ClientGroups](#clientgroups)
+ - [Delete client tag](#deleteclienttag)
  - [Products](#products)
  - [Prices](#prices)
  - [Save price](#saveprice)
@@ -92,13 +93,13 @@ List available slots.
 
 Method: GET
 
-| Argument   | Type     | Required | Description                                                                                |
-|------------|----------|----------|--------------------------------------------------------------------------------------------|
-| tenant     | string   | yes      |                                                                                            |
-| start      | datetime | yes      | The start of the search period                                                             |
-| end        | datetime | yes      | The end of the search period                                                               |
-| slots      | int      | no       | The number of green fees (default is 1)                                                    |
-| tags       | string[] | no       | Array of tags that the reservation types must have                                         |
+| Argument   | Type     | Required | Description                                                                          |
+| ---------- | -------- | -------- | ------------------------------------------------------------------------------------ |
+| tenant     | string   | yes      |                                                                                      |
+| start      | datetime | yes      | The start of the search period                                                       |
+| end        | datetime | yes      | The end of the search period                                                         |
+| slots      | int      | no       | The number of green fees (default is 1)                                              |
+| tags       | string[] | no       | Array of tags that the reservation types must have                                   |
 | idResource | int      | no       | The resource id returned from /api/resources to limit results to a specific resource |
 
 List of valid tags: 
@@ -140,7 +141,7 @@ Response:
 Returns a list of slots:
 
 | Argument               | Type          | Optional | Description                                                          |
-|------------------------|---------------|----------|----------------------------------------------------------------------|
+| ---------------------- | ------------- | -------- | -------------------------------------------------------------------- |
 | idType                 | int           | no       | The reservation type id.                                             |
 | max                    | int           | no       | The maximum number of slots allowed.                                 |
 | min                    | int           | no       | The minimum number of slots allowed.                                 |
@@ -277,10 +278,11 @@ Response:
 
 Methbod: GET
 
-| Argument | Type     | Required | Description          |
-|----------|----------|----------|----------------------|
-| tenant   | string   | yes      |                      |
-| start    | datetime | yes      | The reservation date |
+| Argument       | Type     | Required | Description                                         |
+| -------------- | -------- | -------- | --------------------------------------------------- |
+| tenant         | string   | yes      |                                                     |
+| start          | datetime | yes      | The reservation date                                |
+| idResourceType | datetime | no       | The resource type to which this extra is associated |
 
 Example:
 
@@ -345,14 +347,14 @@ Methbod: POST
 
 Arguments: an array of reservation objects. Each reservations must specify:
 
-| Argument   | Type     | Required | Description                                                                     |
-|------------|----------|----------|---------------------------------------------------------------------------------|
-| idType     | int      | yes      | The reservation type                                                            |
-| start      | datetime | yes      | The date of this slot                                                           |
-| timeout    | datetime | no       | The date when it will be released if it is not confirmed                        |
+| Argument   | Type     | Required | Description                                                               |
+| ---------- | -------- | -------- | ------------------------------------------------------------------------- |
+| idType     | int      | yes      | The reservation type                                                      |
+| start      | datetime | yes      | The date of this slot                                                     |
+| timeout    | datetime | no       | The date when it will be released if it is not confirmed                  |
 | idResource | int      | no       | The resource id returned from /api/resources to force a specific resource |
-| name       | string   | no       | The client's name                                                               |
-| email      | string   | no       | The client's email                                                              |
+| name       | string   | no       | The client's name                                                         |
+| email      | string   | no       | The client's email                                                        |
 
 Example:
 
@@ -568,7 +570,7 @@ List reservation types
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | ids      | int[]  | no       | The id or ids to be fetched                                 |
 | offset   | int    | no       | The offset of the first row to be returned                  |
@@ -618,7 +620,7 @@ List resources
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
@@ -666,7 +668,7 @@ List slots
 Method: GET
 
 | Argument | Type     | Required | Description                    |
-|----------|----------|----------|--------------------------------|
+| -------- | -------- | -------- | ------------------------------ |
 | tenant   | string   | yes      | Tenant name                    |
 | start    | datetime | yes      | The start of the search period |
 | end      | datetime | yes      | The end of the search period   |
@@ -876,7 +878,7 @@ List reservations
 Method: GET
 
 | Argument | Type     | Required | Description                       |
-|----------|----------|----------|-----------------------------------|
+| -------- | -------- | -------- | --------------------------------- |
 | tenant   | string   | yes      | Tenant name                       |
 | start    | datetime | yes      | Start date and time search period |
 | end      | datetime | yes      | End date and time search period   |
@@ -949,7 +951,7 @@ List client groups
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
@@ -984,7 +986,7 @@ List clients
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | search   | string | no       | Search clients by text                                      |
 | offset   | int    | no       | The offset of the first row to be returned                  |
@@ -1005,7 +1007,7 @@ Response:
 Return a list of clients:
 
 | Argument | Type   | Description      |
-|----------|--------|------------------|
+| -------- | ------ | ---------------- |
 | id       | int    | The client id    |
 | name     | string | The client name  |
 | email    | string | The client email |
@@ -1027,6 +1029,26 @@ Example:
 ]
 ```
 
+<h2 id="deleteclienttag">Delete client tag</h2>
+
+Method: POST
+
+| Argument | Type   | Required | Description                   |
+| -------- | ------ | -------- | ----------------------------- |
+| tenant   | string | yes      | Tenant name                   |
+| idTag    | int    | yes      | Tag ID                        |
+| idClient | int    | yes      | Client ID                     |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/deleteClientTag \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d idTag=5 \
+ -d idClient=10
+```
+
 ### Products
 
 List products
@@ -1034,7 +1056,7 @@ List products
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | search   | string | no       | Search products by text                                     |
 | offset   | int    | no       | The offset of the first row to be returned                  |
@@ -1055,7 +1077,7 @@ Response:
 Return a list of products:
 
 | Argument | Type   | Description      |
-|----------|--------|------------------|
+| -------- | ------ | ---------------- |
 | id       | int    | The product id   |
 | name     | string | The product name |
 
@@ -1082,7 +1104,7 @@ List prices
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
@@ -1110,7 +1132,7 @@ Example:
         "idAgeGroup": null,
         "idClient": null,
         "idClientGroup": null,
-        "idFamiliySales": null,
+        "idFamilySales": null,
         "idMembership": null,
         "idProduct": 1,
         "maxAdvance": null,
@@ -1135,7 +1157,7 @@ Save a price. If it has an id it will update it, otherways it will create a new 
 Method: POST
 
 | Argument | Type | Required | Description        |
-|----------|------|----------|--------------------|
+| -------- | ---- | -------- | ------------------ |
 | data     | json | yes      | The object as json |
 
 Example:
@@ -1158,7 +1180,7 @@ Delete multiple prices
 Method: POST
 
 | Argument | Type   | Required | Description              |
-|----------|--------|----------|--------------------------|
+| -------- | ------ | -------- | ------------------------ |
 | tenant   | string | yes      | Tenant name              |
 | idPrices | int[]  | yes      | Array with the price ids |
 
@@ -1179,7 +1201,7 @@ List discounts
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
-|----------|--------|----------|-------------------------------------------------------------|
+| -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
@@ -1207,7 +1229,7 @@ Example:
         "idAgeGroup": null,
         "idClient": null,
         "idClientGroup": null,
-        "idFamiliySales": null,
+        "idFamilySales": null,
         "idMembership": null,
         "idProduct": 1,
         "maxAdvance": null,
@@ -1236,7 +1258,7 @@ Save a discount. If it has an id it will update it, otherways it will create a n
 Method: POST
 
 | Argument | Type | Required | Description        |
-|----------|------|----------|--------------------|
+| -------- | ---- | -------- | ------------------ |
 | data     | json | yes      | The object as json |
 
 Example:
@@ -1274,13 +1296,14 @@ Creates new sale
 
 Method: POST
 
-| Argument   | Type   | Required | Description    |
-|------------|--------|----------|----------------|
-| tenant     | string | yes      | Tenant name    |
-| idProduct  | int    | yes      | The product id |
-| idClient   | int    | yes      | The client id  |
-| parentName | int    | yes      | Referer name   |
-| idParent   | int    | yes      | Referer id     |
+| Argument       | Type   | Required | Description      |
+| ----------     | ------ | -------- | --------------   |
+| tenant         | string | yes      | Tenant name      |
+| idProduct      | int    | yes      | The product id   |
+| idClient       | int    | yes      | The client id    |
+| parentName     | int    | yes      | Referer name     |
+| idParent       | int    | yes      | Referer id       |
+| idCashRegister | int    | no       | Cash register id |
 
 Example:
 
@@ -1299,7 +1322,7 @@ Response:
 Return SaleLine id:
 
 | Argument   | Type | Description     |
-|------------|------|-----------------|
+| ---------- | ---- | --------------- |
 | saleLineId | int  | The SaleLine id |
 
 Example:
@@ -1322,7 +1345,7 @@ Cancel multiple sales
 Method: POST
 
 | Argument    | Type   | Required | Description                 |
-|-------------|--------|----------|-----------------------------|
+| ----------- | ------ | -------- | --------------------------- |
 | tenant      | string | yes      | Tenant name                 |
 | idSaleLines | int[]  | yes      | Array with the saleline ids |
 
@@ -1342,7 +1365,7 @@ List blockouts
 Method: GET
 
 | Argument   | Type     | Required | Description                            |
-|------------|----------|----------|----------------------------------------|
+| ---------- | -------- | -------- | -------------------------------------- |
 | tenant     | string   | yes      | Tenant name                            |
 | idResource | int      | no       | The resource id                        |
 | start      | datetime | no       | Start date and time for blocking slots |
@@ -1405,7 +1428,7 @@ Block slots in the occupation table
 Method: POST
 
 | Argument   | Type     | Required | Description                            |
-|------------|----------|----------|----------------------------------------|
+| ---------- | -------- | -------- | -------------------------------------- |
 | tenant     | string   | yes      | Tenant name                            |
 | idResource | int      | yes      | The resource id                        |
 | start      | datetime | yes      | Start date and time for blocking slots |
@@ -1454,7 +1477,7 @@ Cancel a blockout by ID
 Method: POST
 
 | Argument | Type   | Required | Description            |
-|----------|--------|----------|------------------------|
+| -------- | ------ | -------- | ---------------------- |
 | tenant   | string | yes      | Tenant name            |
 | id       | int    | yes      | The blockout object id |
 

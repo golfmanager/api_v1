@@ -35,15 +35,15 @@ Custom commands
 
 
 External functions 
------------
+----------- 
 This functions depend on other plugins
 
 
-| Command | Args                                        | Description                                         |
-| ------- | ------------------------------------------- | --------------------------------------------------- |
-| exec    | ["billing.newVoucher", idVoucherType]       |                                                     |
-| exec    | ["billing.addTag"*, ["Left handed"]*]       | Add a tag to the selected lines.                    |
+| Command | Args                                          | Description                                         |
+| ------- | --------------------------------------------- | --------------------------------------------------- |
+| exec    | ["billing.newVoucher", idVoucherType]         |                                                     |
+| exec    | ["billing.addTag"*, ["Left handed"]*]         | Add a tag to the selected lines.                    |
 | exec    | ["recurring.newMembership", idMembershipType] | Create a new membership                             |
-| exec    | ["timetable.newReservation", idReservation] | Create a new reservation linked to the selected one |
-| exec    | ["fandb.sendToPrinter"]                     | Food and Beverage: send to kitchen printer          |
-| exec    | ["fandb.moveLines"]                         | Food and Beverage: move lines to another table      |
+| exec    | ["timetable.newReservation", idReservation]   | Create a new reservation linked to the selected one |
+| exec    | ["fandb.sendToPrinter"]                       | Food and Beverage: send to kitchen printer          |
+| exec    | ["fandb.moveLines"]                           | Food and Beverage: move lines to another table      |
