@@ -77,7 +77,7 @@ Example request
 
 ```
 $ curl -i https://mt.golfmanager.es/api/tenants \
-   -u 5Jvm8sCtVr:b31aT5bScxk46aT
+   -u user:key
 ```
 
 Example response
@@ -117,7 +117,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/searchAvailability \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d start="2019-04-23T07:00:00" \
  -d end="2019-04-23T11:00:00" \
@@ -128,7 +128,7 @@ Example searching only for reservations that contain 9 or 18 holes:
 
 ```bash
 curl https://mt.golfmanager.es/api/searchAvailability \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d start="2019-04-23T07:00:00" \
  -d end="2019-04-23T11:00:00" \
@@ -229,7 +229,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/availabilityTypes \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo 
 ```
 
@@ -237,7 +237,7 @@ Or filtering by tag:
 
 ```bash
 curl https://mt.golfmanager.es/api/availabilityTypes \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d tags=["18holes", "9holes"]
 ```
@@ -288,9 +288,9 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/extras \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=demo
- -d start="2019-08-23T07:00:00" \
+ -u user:key \
+ -d tenant=demo \
+ -d start="2019-08-23T07:00:00"
 ```
 
 Response:
@@ -360,7 +360,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/makeReservation \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d 'reservations=[{"idType":1,"start":"2018-11-09T10:00:00%2B02:00"}]'
 ```
@@ -421,7 +421,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/confirmReservation \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d 'ids=[234]'
 ```
@@ -447,7 +447,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/cancelReservation \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d 'ids=[234]'
 ```
@@ -474,7 +474,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/sale \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d 'id=34'
 ```
@@ -531,7 +531,7 @@ Example:
 ```bash
 curl https://mt.golfmanager.es/api/tenant \
  -d tenant=demo \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT
+ -u user:key
 ```
 
 Response:
@@ -580,7 +580,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/reservationtypes \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo
 ```
 
@@ -629,7 +629,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/resources \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo
 ```
 
@@ -677,7 +677,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/teesheetRules \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d start="2019-01-01T23:00:00.000Z" \
  -d end="2019-01-02T17:23:00.000Z"
@@ -888,7 +888,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/reservations \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d start=2018-12-14T08:00:00%2B01:00 \
  -d end=2018-12-14T18:00:00%2B01:00
@@ -960,7 +960,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/clientGroups \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo
 ```
 
@@ -996,7 +996,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/clients \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d search=a \
  -d limit=500
@@ -1033,17 +1033,17 @@ Example:
 
 Method: POST
 
-| Argument | Type   | Required | Description                   |
-| -------- | ------ | -------- | ----------------------------- |
-| tenant   | string | yes      | Tenant name                   |
-| idTag    | int    | yes      | Tag ID                        |
-| idClient | int    | yes      | Client ID                     |
+| Argument | Type   | Required | Description |
+| -------- | ------ | -------- | ----------- |
+| tenant   | string | yes      | Tenant name |
+| idTag    | int    | yes      | Tag ID      |
+| idClient | int    | yes      | Client ID   |
 
 Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/deleteClientTag \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d idTag=5 \
  -d idClient=10
@@ -1066,7 +1066,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/products \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d search=a \
  -d limit=500
@@ -1113,7 +1113,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/prices \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo
 ```
 
@@ -1164,7 +1164,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/savePrice \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d data="{\"idProduct\":1,\"name\":\"Twilight\",\"price\":100,\"priority\":0,\"weekDays\":127}"
 ```
@@ -1188,7 +1188,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/deletePrices \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d idPrices=[1,2]
 ```
@@ -1210,7 +1210,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/discounts \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo
 ```
 
@@ -1265,7 +1265,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/saveDiscount \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d data="{\"idProduct\":1,\"name\":\"Twilight\",\"percent\":100,\"priority\":0,\"weekDays\":127}"
 ```
@@ -1297,7 +1297,7 @@ Creates new sale
 Method: POST
 
 | Argument       | Type   | Required | Description      |
-| ----------     | ------ | -------- | --------------   |
+| -------------- | ------ | -------- | ---------------- |
 | tenant         | string | yes      | Tenant name      |
 | idProduct      | int    | yes      | The product id   |
 | idClient       | int    | yes      | The client id    |
@@ -1309,7 +1309,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/newSale \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d idProduct=1 \
  -d idClient=1 \
@@ -1353,7 +1353,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/cancelSales \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d idLines=[1,2]
 ```
@@ -1375,7 +1375,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/blockouts \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo
  -d idResource=2 
  -d start='2019-04-12'
@@ -1441,7 +1441,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/blockout \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d idResource=1 \
  -d start=2018-12-14T08:00:00%2B01:00 \
@@ -1485,7 +1485,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.es/api/blockout \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -u user:key \
  -d tenant=demo \
  -d id=1
 ```
