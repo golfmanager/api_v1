@@ -50,7 +50,7 @@ For example:
  - [Reservations](#reservations)
  - [Save client](#SaveClient)
  - [Clients](#clients)
- - [Clients](#fullclients)
+ - [Clients Full](#clientsfull)
  - [ClientGroups](#clientgroups)
  - [Delete client tag](#deleteclienttag)
  - [Products](#products)
@@ -1058,7 +1058,7 @@ Example:
 ```
 
 
-### FullClients
+### ClientsFull
 
 Lists clients with all their properties except passwords and hashes
 
