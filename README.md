@@ -50,6 +50,7 @@ For example:
  - [Reservations](#reservations)
  - [Save client](#SaveClient)
  - [Clients](#clients)
+ - [Clients](#fullclients)
  - [ClientGroups](#clientgroups)
  - [Delete client tag](#deleteclienttag)
  - [Products](#products)
@@ -1052,6 +1053,62 @@ Example:
     "id": 2,
     "name": "Jane Doe",
     "email": "janedoe@test.com"
+  }
+]
+```
+
+
+### FullClients
+
+Lists clients with all their properties except passwords and hashes
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| id       | number | no       | Search clients by id (exact match)                          |
+| email    | string | no       | Search clients by email (exact match)                       |
+| search   | string | no       | Search clients by name (contains)                           |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/clientsFull \
+ -u user:key \
+ -d tenant=demo \
+ -d search=foo \
+ -d limit=500
+```
+
+Response:
+
+Returns a list of clients:
+
+| Argument | Type   | Description      |
+| -------- | ------ | ---------------- |
+| id       | int    | The client id    |
+| name     | string | The client name  |
+| email    | string | The client email |
+| ...      | ...    | ...              |
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "johndoe@test.com",
+    ...
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "email": "janedoe@test.com",
+    ...
   }
 ]
 ```
