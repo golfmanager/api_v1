@@ -62,6 +62,7 @@ For example:
  - [Discounts](#discounts)
  - [Save discount](#savediscount)
  - [New sale](#newSale)
+ - [Create sale](#createSale)
  - [Cancel sales](#cancelSales)
  - [Blockouts](#blockouts)
  - [Blockout](#blockout)
