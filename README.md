@@ -48,10 +48,13 @@ For example:
  - [Resources](#resources)
  - [Teesheet Rules](#teesheetrules)
  - [Reservations](#reservations)
+ - [Save client](#SaveClient)
  - [Clients](#clients)
  - [ClientGroups](#clientgroups)
  - [Delete client tag](#deleteclienttag)
  - [Products](#products)
+ - [Payments](#payments)
+ - [Salelines](#salelines)
  - [Prices](#prices)
  - [Save price](#saveprice)
  - [Delete prices](#deleteprices)
@@ -978,6 +981,30 @@ Example:
 ```
 
 
+### SaveClient
+
+Save a client. If it has an id it will update it, otherways it will create a new one.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveClient \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"John\",\"nationality\":\"ES\",\"gender\":1,\"idGroup\":40}"
+```
+
+Response:
+
+The ID if it is created. Nothing if it is an update.
+
+
 
 ### Clients
 
@@ -1092,6 +1119,103 @@ Example:
     "idSubfamily": 1,
     "name": "Test Product 1",
     "price": 50
+  }
+]
+```
+
+
+### Payments
+
+List payments filtered by dates or client
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| start    | date   | no       | Start date                                                  |
+| end      | date   | no       | End date                                                    |
+| idClient | int    | no       | Client ID. Either the ID or the range of dates is required  |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/payments \
+ -u user:key \
+ -d tenant=demo \
+ -d start=2020-08-29 \
+ -d end=2020-08-30T15:16:17
+```
+
+Response:
+
+Returns a list of payments:
+
+| Argument | Type   | Description      |
+| -------- | ------ | ---------------- |
+| id       | int    | The payment id   |
+| amount   | float  | Payment amount   |
+
+The function returns many more properties, including those created by the club.
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "amount": 1.5,
+    ...
+  }
+]
+```
+
+
+### Salelines
+
+List salelines filtered by dates or client
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| start    | date   | no       | Start date                                                  |
+| end      | date   | no       | End date. Maximum date range is 90 days                     |
+| idClient | int    | no       | Client ID. Either the ID or the range of dates is required  |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/salelines \
+ -u user:key \
+ -d tenant=demo \
+ -d start=2020-08-29 \
+ -d end=2020-08-30T15:16:17
+```
+
+Response:
+
+Returns a list of salelines:
+
+| Argument    | Type   | Description         |
+| --------    | ------ | ------------------- |
+| id          | int    | The payment id      |
+| total       | float  | Saleline total      |
+| productName | string | Nombre del producto |
+| clientName  | string | Nombre del cliente  |
+| memberCode  | string | Número de socio     |
+
+The function returns many more properties, including those created by the club.
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "total": 1.5,
+    ...
   }
 ]
 ```
@@ -1336,6 +1460,66 @@ Example:
     "saleLineId": 2
   }
 ]
+```
+
+### createSale
+
+Creates new sale with multiple products and optionally pays for the sale
+
+Method: POST
+
+| Argument        | Type   | Required | Description        |
+| --------------  | ------ | -------- | ----------------   |
+| tenant          | string | yes      | Tenant name        |
+| salelines       | Array  | yes      | The salelines      |
+| idClient        | int    | yes      | The client id      |
+| parentName      | int    | yes      | Referer name       |
+| idParent        | int    | yes      | Referer id         |
+| idCashRegister  | int    | no       | Cash register id   |
+| idPaymentMethod | int    | no       | Payment method id  |
+
+If idPaymentMethod is included, the sale will be paid using that payment method.
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/createSale \
+ -u user:key \
+ -d tenant=demo \
+ -d idClient=1 \
+ -d parentName="Test platform" \
+ -d idParent=1
+ -d idPaymentMethod=1 \
+ -d salelines='[{"idProduct":60,"quantity":2,"price":5}]'
+```
+
+In salelines, quantity defaults to 1, price defaults to the product's price.
+
+Response:
+
+Return SaleLine id:
+
+| Argument   | Type  | Description     |
+| ---------- | ----  | --------------- |
+| idSale     | int   | The sale id     |
+| lines      | Array | The salelines   |
+
+Example:
+
+```json
+{
+  "idSale": 1234,
+  "lines": [
+    {
+      "id": 111,
+      ...
+    },
+    {
+      "id": 112,
+      ...
+    }
+  ]
+}
 ```
 
 ### cancelSales

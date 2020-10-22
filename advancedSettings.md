@@ -24,6 +24,11 @@ Show the bookings view in membership mode.
 Value: true/false  
 Show past hours when browsing the current day.
 
+**ebookings.hideHomePagePrices**
+Value: true/false
+Plugin: consumer
+Hides reservations prices in the main ebookings page
+
 -----
 
 **billing.preventPastChanges**  
@@ -81,3 +86,9 @@ Show data from the last cash register session only in /admin/pos/list
 **pos.showCashierLastSession**  
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list
+
+-----
+
+**school.filterClassTypeByTeacher**
+Value: true/false
+Filter class types by teacher when creating a new class
