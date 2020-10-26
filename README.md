@@ -1028,7 +1028,7 @@ curl https://mt.golfmanager.es/api/clients \
  -u user:key \
  -d tenant=demo \
  -d search=a \
- -d limit=500
+ -d count=500
 ```
 
 Response:
@@ -1061,18 +1061,19 @@ Example:
 
 ### ClientsFull
 
-Lists clients with all their properties except passwords and hashes
+Lists clients with all their properties
 
 Method: GET
 
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| id       | number | no       | Search clients by id (exact match)                          |
-| email    | string | no       | Search clients by email (exact match)                       |
-| search   | string | no       | Search clients by name (contains)                           |
-| offset   | int    | no       | The offset of the first row to be returned                  |
-| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| Argument   | Type   | Required | Description                                                 |
+| --------   | ------ | -------- | ----------------------------------------------------------- |
+| tenant     | string | yes      | Tenant name                                                 |
+| id         | number | no       | Search clients by id (exact match)                          |
+| email      | string | no       | Search clients by email (exact match)                       |
+| search     | string | no       | Search clients by name (contains)                           |
+| centerCard | string | no       | Search clients by center card (exact match)                 |
+| offset     | int    | no       | The offset of the first row to be returned                  |
+| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 Example:
 
@@ -1081,7 +1082,7 @@ curl https://mt.golfmanager.es/api/clientsFull \
  -u user:key \
  -d tenant=demo \
  -d search=foo \
- -d limit=500
+ -d count=500
 ```
 
 Response:
@@ -1112,6 +1113,26 @@ Example:
     ...
   }
 ]
+```
+
+<h2 id="saveclienttag">Adds tags to a client</h2>
+
+Method: POST
+
+| Argument | Type   | Required | Description      |
+| -------- | ------ | -------- | -----------      |
+| tenant   | string | yes      | Tenant name      |
+| idTags   | array  | yes      | Array of tag IDs |
+| idClient | int    | yes      | The client ID    |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveClientTags \
+ -u user:key \
+ -d tenant=demo \
+ -d idTags=[5, 15] \
+ -d idClient=10
 ```
 
 <h2 id="deleteclienttag">Delete client tag</h2>
@@ -1154,7 +1175,7 @@ curl https://mt.golfmanager.es/api/products \
  -u user:key \
  -d tenant=demo \
  -d search=a \
- -d limit=500
+ -d count=500
 ```
 
 Response:

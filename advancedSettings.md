@@ -60,6 +60,10 @@ Value: true/false
 Don't generate a payment when any line has useDate in the future. They payment will be saved as a payment on account.
 When the date comes and you try to pay again (with the partial or full payment on account) the payment will be generated.
 
+**billing.skipTicketOnPayment**  
+Value: true/false  
+Automatically generate a ticket when making a payment.
+
 -----
 
 **eshop.thankyouPage**  
