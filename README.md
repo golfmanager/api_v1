@@ -52,6 +52,7 @@ For example:
  - [Clients](#clients)
  - [Clients Full](#clientsfull)
  - [ClientGroups](#clientgroups)
+ - [Save client tags](#saveclienttags)
  - [Delete client tag](#deleteclienttag)
  - [Products](#products)
  - [Payments](#payments)
@@ -1115,7 +1116,7 @@ Example:
 ]
 ```
 
-<h2 id="saveclienttag">Adds tags to a client</h2>
+<h2 id="saveclienttags">Adds tags to a client</h2>
 
 Method: POST
 
