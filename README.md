@@ -1301,6 +1301,66 @@ Example:
 ```
 
 
+### Invoices
+
+List invoices filtered by dates or client
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| start    | date   | no       | Start date                                                  |
+| end      | date   | no       | End date. Maximum date range is 90 days                     |
+| idClient | int    | no       | Client ID. Either the ID or the range of dates is required  |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/invoices \
+ -u user:key \
+ -d tenant=demo \
+ -d start=2020-08-29 \
+ -d end=2020-08-30T15:16:17
+```
+
+Response:
+
+Returns a list of invoices:
+
+| Argument    | Type   | Description         |
+| --------    | ------ | ------------------- |
+| id          | int    | The invoice id      |
+| name        | string | Client name         |
+| number      | string | Invoice number      |
+| lines       | array  | Invoice lines       |
+| ...         | ...    | ...                 |
+
+The function returns many more properties, including those created by the club.
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "number": "FAT 201",
+    "lines": [
+      {
+        "id": 1,
+        "idSaleline": 1,
+        "description": "Product 1",
+        "total": 11.22,
+        ...
+      }
+    ]
+    ...
+  }
+]
+```
+
+
 ### Prices
 
 List prices
