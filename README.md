@@ -57,6 +57,7 @@ For example:
  - [Products](#products)
  - [Payments](#payments)
  - [Salelines](#salelines)
+ - [Invoices](#invoices)
  - [Prices](#prices)
  - [Save price](#saveprice)
  - [Delete prices](#deleteprices)
