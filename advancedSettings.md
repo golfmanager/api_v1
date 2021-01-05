@@ -14,6 +14,10 @@ Prevent making reservations on past dates
 Value: true/false  
 Allow anonymous reservations in admin
 
+**bookings.salesPendingPaymentAlert**  
+Value: true/false  
+Show an alert when there are past sales pending payment
+
 -----
 
 **ebookings.membershipMode**  
@@ -62,7 +66,19 @@ When the date comes and you try to pay again (with the partial or full payment o
 
 **billing.skipTicketOnPayment**  
 Value: true/false  
-Automatically generate a ticket when making a payment.
+Skip creating a ticket when paying for salelines set in the future.
+
+**billing.generateInvoiceAndTicket**  
+Value: Series Id
+Automatically generate an invoice and a ticket/receipt when making a payment.
+
+**billing.idDefaultClient**  
+Value: Client Id  
+Use this client by default on sales where the client is null. Required by billing.generateInvoiceAndTicket.
+
+**billing.idOnlineCashRegister**  
+Value: Cash Register Id  
+Use this cash register for online sales. Required by billing.generateInvoiceAndTicket.
 
 -----
 
@@ -96,3 +112,9 @@ Show data from the last cash register session only in /admin/pos/list
 **school.filterClassTypeByTeacher**
 Value: true/false
 Filter class types by teacher when creating a new class
+
+-----
+
+**stock.autoUpdateAverageCost**
+Value: true/false
+Recalculates the average cost of a product after every transaction 

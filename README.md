@@ -64,7 +64,6 @@ For example:
  - [Discounts](#discounts)
  - [Save discount](#savediscount)
  - [New sale](#newSale)
- - [Create sale](#createSale)
  - [Cancel sales](#cancelSales)
  - [Blockouts](#blockouts)
  - [Blockout](#blockout)
@@ -423,6 +422,16 @@ Example:
 Confirm reservations that where created with a timeout.
 
 Methbod: POST
+
+| Argument       | Type     | Required | Description                                         |
+| -------------- | -------- | -------- | --------------------------------------------------- |
+| tenant         | string   | no       |                                                     |
+| ids            | array    | yes      | The reservations IDs                                |
+| paymentMethod  | string   | no       | The method used to pay for the reservations         |
+
+If paymentMethod is present, it will be used to pay for all the reservations.
+If it isn't, only reservations that don't require payment can be confirmed, otherwise the API will throw an error.
+A payment method with that name must already exist in the database or the API will throw an error.
 
 Example:
 
@@ -1601,66 +1610,6 @@ Example:
     "saleLineId": 2
   }
 ]
-```
-
-### createSale
-
-Creates new sale with multiple products and optionally pays for the sale
-
-Method: POST
-
-| Argument        | Type   | Required | Description        |
-| --------------  | ------ | -------- | ----------------   |
-| tenant          | string | yes      | Tenant name        |
-| salelines       | Array  | yes      | The salelines      |
-| idClient        | int    | yes      | The client id      |
-| parentName      | int    | yes      | Referer name       |
-| idParent        | int    | yes      | Referer id         |
-| idCashRegister  | int    | no       | Cash register id   |
-| idPaymentMethod | int    | no       | Payment method id  |
-
-If idPaymentMethod is included, the sale will be paid using that payment method.
-
-Example:
-
-```bash
-curl https://mt.golfmanager.es/api/createSale \
- -u user:key \
- -d tenant=demo \
- -d idClient=1 \
- -d parentName="Test platform" \
- -d idParent=1
- -d idPaymentMethod=1 \
- -d salelines='[{"idProduct":60,"quantity":2,"price":5}]'
-```
-
-In salelines, quantity defaults to 1, price defaults to the product's price.
-
-Response:
-
-Return SaleLine id:
-
-| Argument   | Type  | Description     |
-| ---------- | ----  | --------------- |
-| idSale     | int   | The sale id     |
-| lines      | Array | The salelines   |
-
-Example:
-
-```json
-{
-  "idSale": 1234,
-  "lines": [
-    {
-      "id": 111,
-      ...
-    },
-    {
-      "id": 112,
-      ...
-    }
-  ]
-}
 ```
 
 ### cancelSales
