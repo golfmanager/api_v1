@@ -99,14 +99,17 @@ List available slots.
 
 Method: GET
 
-| Argument   | Type     | Required | Description                                                                          |
-| ---------- | -------- | -------- | ------------------------------------------------------------------------------------ |
-| tenant     | string   | yes      |                                                                                      |
-| start      | datetime | yes      | The start of the search period                                                       |
-| end        | datetime | yes      | The end of the search period                                                         |
-| slots      | int      | no       | The number of green fees (default is 1)                                              |
-| tags       | string[] | no       | Array of tags that the reservation types must have                                   |
-| idResource | int      | no       | The resource id returned from /api/resources to limit results to a specific resource |
+| Argument       | Type     | Required | Description                                                                                           |
+| -------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| tenant         | string   | yes      |                                                                                                       |
+| start          | datetime | yes      | The start of the search period                                                                        |
+| end            | datetime | yes      | The end of the search period                                                                          |
+| slots          | int      | no       | The number of green fees (default is 1)                                                               |
+| tags           | string[] | no       | Array of tags that the reservation types must have                                                    |
+| idResource     | int      | no       | The resource id returned from /api/resources to limit results to a specific resource                  |
+| idResourceType | int      | no       | The resource idResourceType returned from /api/resources to limit results to a specific resource type |
+
+If idResourceType is omitted, the first resource type ordered by idResourceType is used.
 
 List of valid tags: 
 
@@ -430,7 +433,8 @@ Methbod: POST
 | paymentMethod  | string   | no       | The method used to pay for the reservations         |
 
 If paymentMethod is present, it will be used to pay for all the reservations.
-If it isn't, only reservations that don't require payment can be confirmed, otherwise the API will throw an error.
+If it isn't, only reservations that don't require payment will be confirmed, otherwise the API will throw an error.
+In order to confirm reservations with price zero, the payment method must be omitted.
 A payment method with that name must already exist in the database or the API will throw an error.
 
 Example:
@@ -893,12 +897,14 @@ List reservations
 
 Method: GET
 
-| Argument | Type     | Required | Description                       |
-| -------- | -------- | -------- | --------------------------------- |
-| tenant   | string   | yes      | Tenant name                       |
-| start    | datetime | yes      | Start date and time search period |
-| end      | datetime | yes      | End date and time search period   |
-| idClient | int      | no       | Filter reservations by client id  |
+| Argument          | Type     | Required | Description                       |
+| --------          | -------- | -------- | --------------------------------- |
+| tenant            | string   | yes      | Tenant name                       |
+| start             | datetime | yes      | Start date and time search period |
+| end               | datetime | yes      | End date and time search period   |
+| idClient          | int      | no       | Filter reservations by client id  |
+| includeExtras     | bool     | no       | Include extras                    |
+| includeCrossovers | bool     | no       | Include crossovers                |
 
 Example:
 

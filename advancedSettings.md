@@ -80,6 +80,14 @@ Use this client by default on sales where the client is null. Required by billin
 Value: Cash Register Id  
 Use this cash register for online sales. Required by billing.generateInvoiceAndTicket.
 
+**billing.enableTipping**
+Value: true/false
+Allow adding tips to every sale in the POS
+
+**billing.multiCurrencyPOS**
+Value: true/false
+Show multi-currency options in the POS
+
 -----
 
 **eshop.thankyouPage**  
