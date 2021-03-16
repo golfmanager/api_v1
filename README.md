@@ -34,7 +34,7 @@ For example:
  - [Tenant](#tenant)
  - [Search availability](#availability)
  - [extras](#extras)
- - [Availability types](#availabilitytypes)
+ - [List reservation types](#listreservationtypes)
  - [Resources](#resources)
  - [Make reservations](#makereservations)
  - [Confirm reservations](#confirmreservations)
@@ -227,8 +227,8 @@ Example:
 
 
 
- - [Availability types](#availabilitytypes)
-<h2 id="availabilitytypes">List reservation types</h2>
+ - [Reservation types](#listreservationtypes)
+<h2 id="listreservationtypes">List reservation types</h2>
 
 Methbod: GET
 
@@ -654,6 +654,7 @@ curl https://mt.golfmanager.es/api/resources \
 ```
 
 Response:
+If the `hideOnline` property is set to true, the resource must not be used to create reservations even if it shows availability.
 
 Example:
 
@@ -663,6 +664,7 @@ Example:
         "id": 1,
         "idResourceType": 1,
         "name": "Tee 1",
+        "hideOnline": false,
         "resourceTypeName": "Green fees",
         "tags": [
             "tee1"
@@ -672,6 +674,7 @@ Example:
         "id": 2,
         "idResourceType": 1,
         "name": "Tee 10",
+        "hideOnline": true,
         "resourceTypeName": "Green fees",
         "tags": [
             "tee10"

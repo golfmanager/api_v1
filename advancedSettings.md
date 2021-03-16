@@ -18,6 +18,10 @@ Allow anonymous reservations in admin
 Value: true/false  
 Show an alert when there are past sales pending payment
 
+**bookings.onlyPrintIfCheckin**
+Value: true/false
+Only allow reservations to be printed if they've been set as checked in
+
 -----
 
 **ebookings.membershipMode**  
@@ -88,6 +92,14 @@ Allow adding tips to every sale in the POS
 Value: true/false
 Show multi-currency options in the POS
 
+**billing.idCurrencyPaymentMethod**
+Value: Payment Method Id
+A payment method with a cash gateway, enabled, not deleted, not secondary currency and available in the POS.
+
+**billing.payPastUsedateSales**
+Value: true/false
+Show multi-currency options in the POS
+
 -----
 
 **eshop.thankyouPage**  
@@ -115,14 +127,36 @@ Show data from the last cash register session only in /admin/pos/list
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list
 
+**pos.printSeparateTaxes**  
+Value: true/false
+Print ticket lines without taxes and the taxes at the end
+
+**pos.sendTicketByDefault**
+Value: true/false
+Pre-select send tickets to the client's email if available
+
 -----
 
 **school.filterClassTypeByTeacher**
 Value: true/false
 Filter class types by teacher when creating a new class
 
+**school.showVouchersInPopup**
+Value: true/false
+Show the client's vouchers in the class detail popup
+
 -----
 
 **stock.autoUpdateAverageCost**
 Value: true/false
 Recalculates the average cost of a product after every transaction 
+
+-----
+
+**barcodelabels.hidePriceInLabels**
+Value: true/false
+Hide prices in barcode labels
+
+**barcodelabels.convertPriceInLabels**
+Value: true/false
+Convert prices in barcode labels to secondary currency
