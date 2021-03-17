@@ -1092,6 +1092,7 @@ Method: GET
 | email      | string | no       | Search clients by email (exact match)                       |
 | search     | string | no       | Search clients by name (contains)                           |
 | centerCard | string | no       | Search clients by center card (exact match)                 |
+| memberCode | string | no       | Search clients by member code (exact match)                 |
 | offset     | int    | no       | The offset of the first row to be returned                  |
 | count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
