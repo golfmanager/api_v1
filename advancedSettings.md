@@ -135,6 +135,10 @@ Print ticket lines without taxes and the taxes at the end
 Value: true/false
 Pre-select send tickets to the client's email if available
 
+**pos.showDiscountReasons**
+Value: true/false
+Show discount reasons when applying a discount
+
 -----
 
 **school.filterClassTypeByTeacher**
@@ -160,3 +164,9 @@ Hide prices in barcode labels
 **barcodelabels.convertPriceInLabels**
 Value: true/false
 Convert prices in barcode labels to secondary currency
+
+-----
+
+**fandb.requireDinerCount**
+Value: true/false
+Require diner count when creating a new sale from the tables map
