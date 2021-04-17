@@ -364,6 +364,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 | idResource | int      | no       | The resource id returned from /api/resources to force a specific resource |
 | name       | string   | no       | The client's name                                                         |
 | email      | string   | no       | The client's email                                                        |
+| customTag  | string   | no       | Extra information for the club; a single word is recommended              |
 
 Example:
 
