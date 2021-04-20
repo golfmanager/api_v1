@@ -55,6 +55,7 @@ For example:
  - [Save client tags](#saveclienttags)
  - [Delete client tag](#deleteclienttag)
  - [Products](#products)
+ - [Subfamilies](#subfamilies)
  - [Payments](#payments)
  - [Salelines](#salelines)
  - [Invoices](#invoices)
@@ -1220,6 +1221,55 @@ Example:
     "idSubfamily": 1,
     "name": "Test Product 1",
     "price": 50
+  }
+]
+```
+
+### Subfamilies
+
+List subfamilies
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/subfamilies \
+ -u user:key \
+ -d tenant=demo \
+ -d count=500
+```
+
+Response:
+
+Return a list of subfamilies:
+
+| Argument    | Type   | Description                   |
+| ----------- | ------ | ------------------            |
+| id          | int    | The subfamily id              |
+| name        | string | The subfamily name            |
+| code        | string | The subfamily code            |
+| account     | string | The subfamily account         |
+| familyName  | string | The subfamily's parent family |
+| companyName | string | The subfamily's company       |
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Subfamily test",
+    "code": null,
+    "account": "123123",
+    "familyName": "Family test",
+    "companyName": null,
   }
 ]
 ```
