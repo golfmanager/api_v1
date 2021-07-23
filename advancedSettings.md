@@ -22,11 +22,21 @@ Show an alert when there are past sales pending payment
 Value: true/false
 Only allow reservations to be printed if they've been set as checked in
 
+**bookings.checkinCountryReminder**
+Value: true/false
+Display a message if the reservation client doesn't have a country when doing a check in
+
 -----
 
-**ebookings.membershipMode**  
-Value: true/false  
+**ebookings.membershipMode**
+Value: true/false
+Plugin: consumer
 Show the bookings view in membership mode.
+
+**ebookings.membershipModeGroup**
+Value: Client group ID
+Plugin: consumer
+Only clients from this group will have their names displayed in /consumer
 
 **ebookings.showPastHours**  
 Value: true/false  
@@ -36,6 +46,10 @@ Show past hours when browsing the current day.
 Value: true/false
 Plugin: consumer
 Hides reservations prices in the main ebookings page
+
+**ebookings.showPriceName**
+Value: true/false
+Show price name in consumer/ebookings
 
 -----
 
@@ -98,7 +112,15 @@ A payment method with a cash gateway, enabled, not deleted, not secondary curren
 
 **billing.payPastUsedateSales**
 Value: true/false
-Show multi-currency options in the POS
+Allows you to pay sales from the past 
+
+**billing.alwaysGenerateTicket**
+Value: true/false
+Always generate ticket (including total paid zero & all virtual payments)
+
+**billing.idDownPaymentProduct**
+Value: Product Id
+Generate a sale line instead of a payment on account (incompatible with billing.skipTicketOnPayment)
 
 -----
 

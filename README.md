@@ -59,6 +59,7 @@ For example:
  - [Payments](#payments)
  - [Salelines](#salelines)
  - [Invoices](#invoices)
+ - [Tickets](#tickets)
  - [Prices](#prices)
  - [Save price](#saveprice)
  - [Delete prices](#deleteprices)
@@ -1328,12 +1329,13 @@ List salelines filtered by dates or client
 
 Method: GET
 
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| start    | date   | no       | Start date                                                  |
-| end      | date   | no       | End date. Maximum date range is 90 days                     |
-| idClient | int    | no       | Client ID. Either the ID or the range of dates is required  |
+| Argument  | Type   | Required | Description                                                 |
+| --------  | ------ | -------- | ----------------------------------------------------------- |
+| tenant    | string | yes      | Tenant name                                                 |
+| start     | date   | no       | Start date                                                  |
+| end       | date   | no       | End date. Maximum date range is 90 days                     |
+| idClient  | int    | no       | Client ID. Either the ID or the range of dates is required  |
+| byUseDate | bool   | no       | Filter by use date. Default is create date                  |
 
 Example:
 
@@ -1416,6 +1418,70 @@ Example:
   {
     "id": 1,
     "name": "John Doe",
+    "number": "FAT 201",
+    "lines": [
+      {
+        "id": 1,
+        "idSaleline": 1,
+        "description": "Product 1",
+        "total": 11.22,
+        ...
+      }
+    ]
+    ...
+  }
+]
+```
+
+
+### Tickets
+
+List tickets filtered by dates, id or number
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| start    | date   | no       | Start date                                                  |
+| end      | date   | no       | End date. Maximum date range is 90 days                     |
+| id       | int    | no       | Ticket id                                                   |
+| number   | string | no       | Ticket number                                               |
+
+* Either dates or id/number are required
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/tickets \
+ -u user:key \
+ -d tenant=demo \
+ -d start=2020-08-29 \
+ -d end=2020-08-30T15:16:17
+```
+
+Response:
+
+Returns a list of tickets:
+
+| Argument    | Type   | Description         |
+| --------    | ------ | ------------------- |
+| id          | int    | The ticket  id      |
+| clientName  | string | Client name         |
+| number      | string | Ticket number       |
+| lines       | array  | Ticket lines        |
+| payments    | array  | Ticket payments     |
+| ...         | ...    | ...                 |
+
+The function returns many more properties, including those created by the club.
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "clientName": "John Doe",
     "number": "FAT 201",
     "lines": [
       {
