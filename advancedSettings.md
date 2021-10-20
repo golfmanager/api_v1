@@ -1,6 +1,56 @@
+# System
 
-Advanced Settings
-============================
+## Descripción 
+Nombre meta: Sistema
+
+Funcionalidades básicas del sistema
+
+## Instalación
+Instalado por defecto con la inicialización de la aplicación.
+## Entidades 
+* Country 
+
+* Región 
+
+* Templates
+
+* TemplateTypes
+
+* EmailAcount: 
+
+    Puertos habituales: 587, 465 y 25
+
+* SentEmail
+
+* AdvancedSetting
+
+* Settings
+
+* VirtualSettings: 
+    Formatos de texto, ejemplo: 
+    
+```
+    S.buildFlash("info", `Format examples:
+                        DecimalSeparator: .
+                        ThousandSeparator: ,
+                        Currency: USD
+                        CurrencySymbol: $
+                        CurrencyPattern: $0:00
+                        FloatPattern: 0:00
+                        ShortDatePattern: MM-dd-yyyy
+                        LongDatePattern: ddd MMM dd yyyy
+                        DateTimePattern: MM-dd-yyyy HH:mm
+                        LongDateTimePattern: ddd MMM dd yyyy HH:mm
+                        FirstDayOfWeek: Sunday`)
+```
+
+* Plugin
+
+* TermsPage
+
+* Apps: system a su vez maneja la sección de App Center para instalar o desinstalar los plugins.
+
+## Opciones avanzadas 
 
 **bookings.rememberType**  
 Value: true/false  
@@ -50,6 +100,10 @@ Hides reservations prices in the main ebookings page
 **ebookings.showPriceName**
 Value: true/false
 Show price name in consumer/ebookings
+
+**ebookings.showFullPrice**
+Value: true/false
+When a reservation type has the same min/max restriction, show the price of the entire package.
 
 -----
 

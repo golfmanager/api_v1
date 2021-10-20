@@ -66,6 +66,7 @@ For example:
  - [Discounts](#discounts)
  - [Save discount](#savediscount)
  - [New sale](#newSale)
+ - [Create sale](#createSale)
  - [Cancel sales](#cancelSales)
  - [Blockouts](#blockouts)
  - [Blockout](#blockout)
@@ -1737,6 +1738,57 @@ Example:
     "saleLineId": 2
   }
 ]
+```
+
+### createSale
+
+Creates new sale and optionally pays for the items
+
+Method: POST
+
+| Argument       | Type   | Required | Description      |
+| -------------- | ------ | -------- | ---------------- |
+| tenant         | string | yes      | Tenant name                                    |
+| idClient       | int    | yes      | The client id                                  |
+| paymentMethod  | string | no       | Payment method used to pay for the lines       |
+| parentName     | int    | no       | Referer name                                   |
+| idParent       | int    | no       | Referer id                                     |
+| idCashRegister | int    | no       | Cash register id                               |
+| salelines      | array  | yes      | The salelines including idProduct and quantity |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/createSale \
+ -u user:key \
+ -d tenant=demo \
+ -d salelines='{ "idProduct": 1, "quantity": 2 }' \
+ -d idClient=1 \
+ -d paymentMethod=Visa
+```
+
+Response:
+An object with two properties: idSale, lines
+
+Example:
+
+```json
+{
+  idSale: 1,
+  lines:
+  [
+    {
+      "id": 1,
+      "total": 10,
+      ...
+    },
+    {
+      "id": 2,
+      "total": 20,
+      ...
+    }
+  ]
+}
 ```
 
 ### cancelSales
