@@ -203,10 +203,6 @@ Show data from the last cash register session only in /admin/pos/list
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list
 
-**pos.printSeparateTaxes**  
-Value: true/false
-Print ticket lines without taxes and the taxes at the end
-
 **pos.sendTicketByDefault**
 Value: true/false
 Pre-select send tickets to the client's email if available

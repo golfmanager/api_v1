@@ -49,6 +49,7 @@ For example:
  - [Teesheet Rules](#teesheetrules)
  - [Reservations](#reservations)
  - [Save client](#SaveClient)
+ - [Save tag](#savetag)
  - [Clients](#clients)
  - [Clients Full](#clientsfull)
  - [ClientGroups](#clientgroups)
@@ -1030,6 +1031,31 @@ Response:
 
 The ID if it is created. Nothing if it is an update.
 
+
+### SaveTag
+
+<h2 id="savetag">Save price</h2>
+
+Save a tag. If it has an id it will update it, otherways it will create a new one.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveTag \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"test123\"}"
+```
+
+Response:
+
+The ID if it is created. Nothing if it is an update.
 
 
 ### Clients
