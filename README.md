@@ -74,8 +74,8 @@ For example:
  - [Cancel blockout](#cancelblockout)
  - [Tax Types](#taxTypes)
  - [Save Tax Types](#saveTaxTypes)
- - [Memberships](#memberships)
- - [Memberships](#saveMemberships)
+ - [Get Memberships](#memberships)
+ - [Save Memberships](#saveMemberships)
 
  
 ---------------------------
@@ -2012,7 +2012,7 @@ curl https://mt.golfmanager.es/api/taxTypes \
  -d data="{\"name\":\"Name\",\"period\":\"1\",\"idProduct\":1}"
 ```
 
-<h2 id="memberships">Memberships</h2>
+<h2 id="memberships">Get Memberships</h2>
 
 Get all memberships
 
@@ -2032,7 +2032,7 @@ curl https://mt.golfmanager.es/api/membership \
  -d id=1
 ```
 
-<h2 id="saveMemberships">Memberships</h2>
+<h2 id="saveMemberships">Update or create Memberships</h2>
 
 Create or update a Membership
 
