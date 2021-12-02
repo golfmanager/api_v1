@@ -72,6 +72,10 @@ For example:
  - [Blockouts](#blockouts)
  - [Blockout](#blockout)
  - [Cancel blockout](#cancelblockout)
+ - [Tax Types](#taxTypes)
+ - [Save Tax Types](#saveTaxTypes)
+ - [Memberships](#memberships)
+ - [Memberships](#saveMemberships)
 
  
 ---------------------------
@@ -1034,7 +1038,7 @@ The ID if it is created. Nothing if it is an update.
 
 ### SaveTag
 
-<h2 id="savetag">Save price</h2>
+<h2 id="savetag">Save tag</h2>
 
 Save a tag. If it has an id it will update it, otherways it will create a new one.
 
@@ -1969,7 +1973,97 @@ curl https://mt.golfmanager.es/api/blockout \
  -d id=1
 ```
 
+<h2 id="taxType">Tax Types</h2>
 
+Get all Tax Types
+
+Method: GET
+
+| Argument | Type   | Required | Description            |
+| -------- | ------ | -------- | ---------------------- |
+| tenant   | string | yes      | Tenant name            |
+| id       | int    | no       | The taxType  object id |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/taxTypes \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+<h2 id="saveTaxType">Create or update Tax Types</h2>
+
+Create or update a tax Types
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/taxTypes \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"Name\",\"period\":\"1\",\"idProduct\":1}"
+```
+
+<h2 id="memberships">Memberships</h2>
+
+Get all memberships
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The membership object id |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/membership \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+<h2 id="saveMemberships">Memberships</h2>
+
+Create or update a Membership
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveMembership \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Membership\",\"period\":\"1\",\"idProduct\":1}"
+```
+
+Available period values:
+
+| Id  | Description    |
+| --- | -------------- |
+| 1   | single         |
+| 3   | fortnight      |
+| 4   | month          |
+| 5   | bimonth        |
+| 6   | trimester      |
+| 7   | fourMonths     |
+| 8   | semester       |
+| 9   | year           |
+| 10  | yearFromStart  |
 
 ---------------------------
 
