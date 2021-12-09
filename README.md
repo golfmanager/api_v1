@@ -546,7 +546,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/reservations \
+curl https://mt.golfmanager.es/api/bookings \
  -u user:key \
  -d tenant=demo \
  -d start=2018-12-14T08:00:00%2B01:00 \
