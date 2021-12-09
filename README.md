@@ -562,34 +562,25 @@ Example:
 ```json
 [
     {
-        "beneficiaryGroupName": "Visitor",
         "beneficiaryNationality": "USA",
         "checkin": false,
-        "clientGroupName": "TTOO A Crédito",
-        "clientNationality": "Spain",
         "confirmDate": null,
         "createDate": "2019-11-20T17:58:46.204610474Z",
         "end": "2019-11-20T19:08:46.203014019Z",
-        "familyName": "Golf",
         "id": 1,
         "idBeneficiary": 2,
-        "idBeneficiaryGroup": 2,
         "idClient": 1,
         "idClientGroup": 1,
-        "idFamily": 1,
         "idProduct": 1,
         "idResource": 3,
         "idSale": 1209,
         "idSaleLine": 12358,
-        "idSubfamily": 1,
         "idType": 1,
         "noShow": false,
-        "online": false,
         "paid": false,
         "productName": "GF 18",
         "reference": "HJK30",
         "start": "2019-11-20T18:58:46.203014019Z",
-        "subfamilyName": "Gree fees",
         "total": 150
     }
 ]
