@@ -40,6 +40,7 @@ For example:
  - [Confirm reservations](#confirmreservations)
  - [Cancel reservations](#cancelreservations)
  - [Sale information](#saleinfo) 
+ - [Bookings](#bookings)
 
  ## Admin API
  - [Tenant](#tenant)
@@ -527,9 +528,72 @@ Response:
 }
 ``` 
 
+### Bookings
 
+List reservations created bu the API client
 
+Method: GET
 
+| Argument          | Type     | Required | Description                       |
+| --------          | -------- | -------- | --------------------------------- |
+| tenant            | string   | yes      | Tenant name                       |
+| start             | datetime | yes      | Start date and time search period |
+| end               | datetime | yes      | End date and time search period   |
+| id                | int      | no       | Filter reservation by id          |
+| includeExtras     | bool     | no       | Include extras                    |
+| includeCrossovers | bool     | no       | Include crossovers                |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/reservations \
+ -u user:key \
+ -d tenant=demo \
+ -d start=2018-12-14T08:00:00%2B01:00 \
+ -d end=2018-12-14T18:00:00%2B01:00
+```
+
+Response:
+
+Return a list of reservations
+
+Example:
+
+```json
+[
+    {
+        "beneficiaryGroupName": "Visitor",
+        "beneficiaryNationality": "USA",
+        "checkin": false,
+        "clientGroupName": "TTOO A Crédito",
+        "clientNationality": "Spain",
+        "confirmDate": null,
+        "createDate": "2019-11-20T17:58:46.204610474Z",
+        "end": "2019-11-20T19:08:46.203014019Z",
+        "familyName": "Golf",
+        "id": 1,
+        "idBeneficiary": 2,
+        "idBeneficiaryGroup": 2,
+        "idClient": 1,
+        "idClientGroup": 1,
+        "idFamily": 1,
+        "idProduct": 1,
+        "idResource": 3,
+        "idSale": 1209,
+        "idSaleLine": 12358,
+        "idSubfamily": 1,
+        "idType": 1,
+        "noShow": false,
+        "online": false,
+        "paid": false,
+        "productName": "GF 18",
+        "reference": "HJK30",
+        "start": "2019-11-20T18:58:46.203014019Z",
+        "subfamilyName": "Gree fees",
+        "total": 150
+    }
+]
+```
 
 
 
