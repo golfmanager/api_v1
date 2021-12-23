@@ -54,9 +54,13 @@ For example:
  - [Clients](#clients)
  - [Clients Full](#clientsfull)
  - [ClientGroups](#clientgroups)
+ - [Save ClientGroups](#saveclientgroups)
  - [Save client tags](#saveclienttags)
  - [Delete client tag](#deleteclienttag)
  - [Products](#products)
+ - [Save Products](#saveproducts)
+ - [Families (Departments)](#families)
+ - [Save Family (Department)](#savefamily)
  - [Subfamilies](#subfamilies)
  - [Payments](#payments)
  - [Salelines](#salelines)
@@ -73,10 +77,14 @@ For example:
  - [Blockouts](#blockouts)
  - [Blockout](#blockout)
  - [Cancel blockout](#cancelblockout)
- - [Tax Types](#taxTypes)
- - [Save Tax Types](#saveTaxTypes)
+ - [Tax Types](#taxtypes)
+ - [Save Tax Types](#savetaxtypes)
  - [Get Memberships](#memberships)
  - [Save Memberships](#saveMemberships)
+ - [Get Payment Methods](#paymentmethods)
+ - [Save Payment Method](#savePaymentmethod)
+ - [Get Voucher Types](#vouchertypes)
+ - [Save Voucher Type](#saveVouchertype)
 
  
 ---------------------------
@@ -1021,14 +1029,6 @@ Example:
 ]
 ```
 
-
-
-
-
-
-
-
-
 <h2 id="clientgroups">Client groups</h2>
 
 List client groups
@@ -1062,6 +1062,28 @@ Example:
 ]
 ```
 
+<h2 id="saveclientgroups">Save Client groups</h2>
+
+Save a ClientGroup. If it has an id it will update it, otherways it will create a new one.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveClientGroups \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"John\",\"color\":\"#EEEEEE\"}"
+```
+
+Response:
+
+The ID of the modified or created resource.
 
 ### SaveClient
 
@@ -1267,12 +1289,21 @@ List products
 
 Method: GET
 
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| search   | string | no       | Search products by text                                     |
-| offset   | int    | no       | The offset of the first row to be returned                  |
-| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| Argument   | Type   | Required | Description                                                 |
+| ---------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant     | string | yes      | Tenant name                                                 |
+| search     | string | no       | Search products by text                                     |
+| sellOnline | string | no       | Allowed to be selled online                                 |
+| offset     | int    | no       | The offset of the first row to be returned                  |
+| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Available values for sellOnline:
+
+| Value  | Description                                          |
+| ------ | ---------------------------------------------------- |
+| true   | All products with the sell online check, checked     |
+| false  | All products with the sell online check, not checked |
+| none   | All products, with or without sell online            |
 
 Example:
 
@@ -1281,6 +1312,7 @@ curl https://mt.golfmanager.es/api/products \
  -u user:key \
  -d tenant=demo \
  -d search=a \
+ -d sellOnline=true \
  -d count=500
 ```
 
@@ -1307,6 +1339,92 @@ Example:
   }
 ]
 ```
+
+### Saveproducts
+
+Create or update a product
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveProduct \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"Name\",\"price\":\"1\",\"idSubfamily\":\"2\"}"
+```
+
+Returns the Id of the product
+
+### Families
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/families \
+ -u user:key \
+ -d tenant=demo \
+ -d search=a \
+ -d count=500
+```
+
+Response:
+
+Return a list of families/departments:
+
+| Argument | Type   | Description      |
+| -------- | ------ | ---------------- |
+| id       | int    | The family id    |
+| name     | string | The family name  |
+| code     | string | The family code  |
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Green Fees",
+    "code": "GF"
+  }
+]
+```
+
+<h2 id="savefamily">Save a family</h2>
+
+Save a Family. If it has an id it will update it, otherways it will create a new one.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveFamily \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"Greenfees\",\"code\":\"GF\"}"
+```
+
+Response:
+
+The ID of the modified or created resource.
 
 ### Subfamilies
 
@@ -2024,7 +2142,7 @@ curl https://mt.golfmanager.es/api/blockout \
  -d id=1
 ```
 
-<h2 id="taxType">Tax Types</h2>
+<h2 id="taxtype">Tax Types</h2>
 
 Get all Tax Types
 
@@ -2044,7 +2162,7 @@ curl https://mt.golfmanager.es/api/taxTypes \
  -d id=1
 ```
 
-<h2 id="saveTaxType">Create or update Tax Types</h2>
+<h2 id="savetaxtype">Create or update Tax Types</h2>
 
 Create or update a tax Types
 
@@ -2057,10 +2175,10 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/taxTypes \
+curl https://mt.golfmanager.es/api/saveTaxTypes \
  -u user:key \
  -d tenant=demo \
- -d data="{\"name\":\"Name\",\"period\":\"1\",\"idProduct\":1}"
+ -d data="{\"name\":\"Name\",\"percent\":\"1\",\"code\":\"CO\",\"description\":\"My tax\"}"
 ```
 
 <h2 id="memberships">Get Memberships</h2>
@@ -2117,6 +2235,105 @@ Available period values:
 | 10  | yearFromStart  |
 
 ---------------------------
+
+<h2 id="memberships">Get Memberships</h2>
+
+Get all memberships
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The membership object id |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/membership \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### Vouchertypes
+
+Get all voucher types
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The membership object id |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/voucherTypes \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### SaveVouchertype
+
+Create or update a Voucher Type
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveVouchertype \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Name\",\"field\":\"1\",\"otherField\":1}"
+```
+
+### Paymentmethods
+
+Get all payment methods
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The membership object id |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/paymentMethods \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### SavePaymentmethod
+
+Create or update a Payment Method
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/savePaymentmethod \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Name\",\"field\":\"1\",\"otherField\":1}"
+```
+
 
 ## Terms of Service
 
