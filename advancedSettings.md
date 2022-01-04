@@ -193,6 +193,10 @@ Select rows all rows int the page versus all rows in the search.
 Value: string  
 Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
 
+**ebookings.requireReservation**
+Value: true/false
+Require a reservation. If the user tries to book an extra only, an error message will be shown.
+
 -----
 
 **pos.showCashierLastSession**  
@@ -242,3 +246,7 @@ Convert prices in barcode labels to secondary currency
 **fandb.requireDinerCount**
 Value: true/false
 Require diner count when creating a new sale from the tables map
+
+**fandb.masterPrinter**
+Value: Printer ID
+Send every saleline to this printer

@@ -1666,11 +1666,12 @@ Returns a list of tickets:
 
 | Argument    | Type   | Description         |
 | --------    | ------ | ------------------- |
-| id          | int    | The ticket  id      |
+| id          | int    | The ticket id       |
 | clientName  | string | Client name         |
 | number      | string | Ticket number       |
 | lines       | array  | Ticket lines        |
 | payments    | array  | Ticket payments     |
+| client      | json   | Client Info         |
 | ...         | ...    | ...                 |
 
 The function returns many more properties, including those created by the club.
