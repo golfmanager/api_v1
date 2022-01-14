@@ -2243,10 +2243,12 @@ Get all memberships
 
 Method: GET
 
-| Argument | Type   | Required | Description              |
-| -------- | ------ | -------- | ------------------------ |
-| tenant   | string | yes      | Tenant name              |
-| id       | int    | no       | The membership object id |
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| id       | int    | no       | The membership object id                                    |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 Example:
 
@@ -2266,7 +2268,7 @@ Method: GET
 | Argument | Type   | Required | Description              |
 | -------- | ------ | -------- | ------------------------ |
 | tenant   | string | yes      | Tenant name              |
-| id       | int    | no       | The membership object id |
+| id       | int    | no       | The voucher object id    |
 
 Example:
 
@@ -2302,10 +2304,12 @@ Get all payment methods
 
 Method: GET
 
-| Argument | Type   | Required | Description              |
-| -------- | ------ | -------- | ------------------------ |
-| tenant   | string | yes      | Tenant name              |
-| id       | int    | no       | The membership object id |
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| id       | int    | no       | The paymentMethod object id to recover                      |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 Example:
 
