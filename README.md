@@ -62,6 +62,7 @@ For example:
  - [Families (Departments)](#families)
  - [Save Family (Department)](#savefamily)
  - [Subfamilies](#subfamilies)
+ - [Save Subfamilies](#SaveSubFamilies)
  - [Payments](#payments)
  - [Salelines](#salelines)
  - [Invoices](#invoices)
@@ -1192,21 +1193,23 @@ Lists clients with all their properties
 
 Method: GET
 
-| Argument   | Type   | Required | Description                                                 |
-| --------   | ------ | -------- | ----------------------------------------------------------- |
-| tenant     | string | yes      | Tenant name                                                 |
-| id         | number | no       | Search clients by id (exact match)                          |
-| email      | string | no       | Search clients by email (exact match)                       |
-| search     | string | no       | Search clients by name (contains)                           |
-| centerCard | string | no       | Search clients by center card (exact match)                 |
-| memberCode | string | no       | Search clients by member code (exact match)                 |
-| offset     | int    | no       | The offset of the first row to be returned                  |
-| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| Argument        | Type   | Required | Description                                                 |
+| --------------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant          | string | yes      | Tenant name                                                 |
+| id              | number | no       | Search clients by id (exact match)                          |
+| email           | string | no       | Search clients by email (exact match)                       |
+| search          | string | no       | Search clients by name (contains)                           |
+| centerCard      | string | no       | Search clients by center card (exact match)                 |
+| memberCode      | string | no       | Search clients by member code (exact match)                 |
+| updateDateStart | date   | no       | Search clients modified after this date                     |
+| updateDateEnd   | date   | no       | Search clients modified before this date                    |
+| offset          | int    | no       | The offset of the first row to be returned                  |
+| count           | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/clientsFull \
+curl https://mt.golfmanager.es/api/clientsFull -G \
  -u user:key \
  -d tenant=demo \
  -d search=foo \
@@ -1475,6 +1478,37 @@ Example:
 ]
 ```
 
+### SaveSubFamilies
+
+Create a new Subfamily or update an existing one. To do an update the field id must be included in the JSON.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example to create a new one:
+
+```bash
+curl https://mt.golfmanager.es/api/saveSubfamily \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"Greenfees\",\"idFamily\":\"2\"}"
+```
+
+Example to update an existing subfamily:
+
+```bash
+curl https://mt.golfmanager.es/api/saveSubfamily \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"New Name\",\"id\":\"23\"}"
+```
+
+Response:
+
+The ID of the modified or created resource.
 
 ### Payments
 
