@@ -90,6 +90,7 @@ For example:
  - [Save Area](#saveArea)
  - [Get Bookings Types](#bookingsTypes)
  - [Save Booking Type](#saveBookingsType)
+ - [Get Blog Posts](#getBlogPosts)
 
  
 ---------------------------
@@ -2459,6 +2460,27 @@ curl https://mt.golfmanager.es/api/saveBookingsType \
  -d data="{\"name\":\"My Name\",\"idResourceType\":\"1\"}"
 ```
 
+### getBlogPosts
+
+If the tenant has the blog module installed, get all posts
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| search   | string | no       | Searchs by title                                            |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/blog/posts -G \
+ -u user:key \
+ -d tenant=demo \
+ -d search="my search"
+```
 
 ## Terms of Service
 

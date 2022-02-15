@@ -78,6 +78,12 @@ Display a message if the reservation client doesn't have a country when doing a 
 
 -----
 
+**contacts.insertIdAsCenterCard**
+Value: true/false
+When creating a client, set the Center Card with the same value as the ID
+
+-----
+
 **ebookings.membershipMode**
 Value: true/false
 Plugin: consumer
@@ -104,6 +110,18 @@ Show price name in consumer/ebookings
 **ebookings.showFullPrice**
 Value: true/false
 When a reservation type has the same min/max restriction, show the price of the entire package.
+
+**ebookings.membershipClientTag**  
+Value: string  
+Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
+
+**ebookings.requireReservation**
+Value: true/false
+Require a reservation. If the user tries to book an extra only, an error message will be shown.
+
+**ebookings.includeOnlineCashRegister**
+Value: true/false
+Include the billing.idOnlineCashRegister in online salelines
 
 -----
 
@@ -188,14 +206,6 @@ Value: true/false
 Plugin: slib   
 Public: true   
 Select rows all rows int the page versus all rows in the search.
-
-**ebookings.membershipClientTag**  
-Value: string  
-Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
-
-**ebookings.requireReservation**
-Value: true/false
-Require a reservation. If the user tries to book an extra only, an error message will be shown.
 
 -----
 
