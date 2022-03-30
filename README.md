@@ -84,7 +84,14 @@ For example:
  - [Save Memberships](#saveMemberships)
  - [Get Payment Methods](#paymentmethods)
  - [Save Payment Method](#savePaymentmethod)
- - [Get Voucher Types](#vouchertypes)
+ - [Get Voucher](#vouchers)
+ - [Save Voucher](#saveVoucher)
+ - [Get Voucher Products](#voucherProducts)
+ - [Save Voucher Product](#saveVoucherProduct)
+ - [Get Voucher Movement](#voucherMovements)
+ - [Get Voucher Recharge](#voucherRecharges)
+ - [Save Voucher Recharge](#saveVoucherRecharge)
+ - [Get Voucher Types](#voucherTypes)
  - [Save Voucher Type](#saveVouchertype)
  - [Get Areas](#areas)
  - [Save Area](#saveArea)
@@ -143,6 +150,7 @@ List of valid tags:
     buggy
     trolley
     electric-trolley
+    clubs
 
 
 Example:
@@ -1597,6 +1605,7 @@ Returns a list of salelines:
 | productName | string | Nombre del producto |
 | clientName  | string | Nombre del cliente  |
 | memberCode  | string | Número de socio     |
+| barcode     | string | Product's bar code  |
 
 The function returns many more properties, including those created by the club.
 
@@ -1744,11 +1753,13 @@ List prices
 
 Method: GET
 
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| offset   | int    | no       | The offset of the first row to be returned                  |
-| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| Argument      | Type   | Required | Description                                                 |
+| ------------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant        | string | yes      | Tenant name                                                 |
+| offset        | int    | no       | The offset of the first row to be returned                  |
+| count         | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| idProduct     | int    | no       | Filter prices by product ID                                 |
+| idClientGroup | int    | no       | Filter prices by client group ID                            |
 
 Example:
 
@@ -2298,9 +2309,9 @@ curl https://mt.golfmanager.es/api/membership \
  -d id=1
 ```
 
-### Vouchertypes
+### vouchers
 
-Get all voucher types
+Get all vouchers
 
 Method: GET
 
@@ -2308,33 +2319,14 @@ Method: GET
 | -------- | ------ | -------- | ------------------------ |
 | tenant   | string | yes      | Tenant name              |
 | id       | int    | no       | The voucher object id    |
-
-Example:
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 ```bash
-curl https://mt.golfmanager.es/api/voucherTypes \
+curl https://mt.golfmanager.es/api/vouchers \
  -u user:key \
  -d tenant=demo \
  -d id=1
-```
-
-### SaveVouchertype
-
-Create or update a Voucher Type
-
-Method: POST
-
-| Argument | Type | Required | Description        |
-| -------- | ---- | -------- | ------------------ |
-| data     | json | yes      | The object as json |
-
-Example:
-
-```bash
-curl https://mt.golfmanager.es/api/saveVouchertype \
- -u user:key \
- -d tenant=demo \
- -d data="{\"name\":\"My Name\",\"field\":\"1\",\"otherField\":1}"
 ```
 
 ### Paymentmethods
@@ -2425,12 +2417,13 @@ Get all bookings types
 
 Method: GET
 
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| id       | int    | no       | The Type object id to recover                               |
-| offset   | int    | no       | The offset of the first row to be returned                  |
-| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| Argument    | Type   | Required | Description                                                   |
+| --------    | ------ | -------- | ------------------------------------------------------------- |
+| tenant      | string | yes      | Tenant name                                                   |
+| id          | int    | no       | The Type object id to recover                                 |
+| offset      | int    | no       | The offset of the first row to be returned                    |
+| count       | int    | no       | The maximum number of rows to be returned. (default is 100)   |
+| includeTags | bool   | no       | Includes an array with the IDs of tags associated to the type |
 
 Example:
 
@@ -2472,6 +2465,7 @@ Method: GET
 | search   | string | no       | Searchs by title                                            |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| priority | int    | no       | THe priority used to sort the blog posts                    |
 
 Example:
 
