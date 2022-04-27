@@ -97,7 +97,14 @@ For example:
  - [Save Area](#saveArea)
  - [Get Bookings Types](#bookingsTypes)
  - [Save Booking Type](#saveBookingsType)
+ - [Get Bookings Resource Types](#bookingsResourceTypes)
+ - [Save Booking Resource Type](#saveBookingsResourceType)
  - [Get Blog Posts](#getBlogPosts)
+ - [Get Bookings Intervals](#bookingsIntervals)
+ - [Save Booking Interval](#saveBookingsInterval)
+ - [Get Bookings Views](#bookingsViews)
+ - [Save Booking View](#saveBookingsView)
+ - [Save Bookings Type Tag](#saveBookingsTypeTag)
 
  
 ---------------------------
@@ -2329,6 +2336,168 @@ curl https://mt.golfmanager.es/api/vouchers \
  -d id=1
 ```
 
+### saveVoucher
+
+Create or update a Voucher
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveVoucher \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"comments\":\"Comment\",\"remaining\":\"1\",\"unlimited\":1,\"weekdays\":1,\"online\":1}"
+```
+
+### voucherProducts
+
+Get all voucher Products
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The voucher object id    |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+```bash
+curl https://mt.golfmanager.es/api/voucherProducts \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### saveVoucherProduct
+
+Create or update a Voucher Product
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveVoucherProduct \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"idProduct\":\"324\",\"idType\":\"12\",\"ratio\":1}"
+```
+
+### voucherMovements
+
+Get all voucher movements
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The voucher movement object id    |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+```bash
+curl https://mt.golfmanager.es/api/voucherMovements \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### voucherRecharges
+
+Get all voucher recharges
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The voucher recharge object id    |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+```bash
+curl https://mt.golfmanager.es/api/voucherRecharges \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### saveVoucherRecharge
+
+Create or update a Voucher Recharge
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveVoucherRecharge \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"idVoucher\":\"324\",\"idVoucherMovement\":\"12\",\"amount\":1}"
+```
+
+### voucherTypes
+
+Get all voucher types
+
+Method: GET
+
+| Argument | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| tenant   | string | yes      | Tenant name              |
+| id       | int    | no       | The voucher type object id    |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+```bash
+curl https://mt.golfmanager.es/api/voucherTypes \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### saveVoucherType
+
+Create or update a Voucher Type
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Allowed modes:
+ - 1: money
+ - 2: units
+ - 3: products
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveVoucherType \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"idProduct\":\"324\",\"unlimited\":\"0\",\"amount\":1,\"name\":\"My Name\",\"mode\":\"1\"}"
+```
+
+
 ### Paymentmethods
 
 Get all payment methods
@@ -2453,6 +2622,48 @@ curl https://mt.golfmanager.es/api/saveBookingsType \
  -d data="{\"name\":\"My Name\",\"idResourceType\":\"1\"}"
 ```
 
+### bookingsResourceTypes
+
+Get all bookings resource types
+
+Method: GET
+
+| Argument    | Type   | Required | Description                                                   |
+| --------    | ------ | -------- | ------------------------------------------------------------- |
+| tenant      | string | yes      | Tenant name                                                   |
+| id          | int    | no       | The Type object id to recover                                 |
+| offset      | int    | no       | The offset of the first row to be returned                    |
+| count       | int    | no       | The maximum number of rows to be returned. (default is 100)   |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/bookingsTypes -G \
+ -u user:key \
+ -d tenant=demo \
+ -d id=1
+```
+
+### saveBookingsResourceType
+
+Create or update a Bookings Resource Type
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveBookingsResourceType \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Name\",\"onlineAllSlots\":\"0\",\"selectHourThenResource\":\"0\"}"
+```
+
+
 ### getBlogPosts
 
 If the tenant has the blog module installed, get all posts
@@ -2475,6 +2686,106 @@ curl https://mt.golfmanager.es/api/blog/posts -G \
  -d tenant=demo \
  -d search="my search"
 ```
+
+### bookingsIntervals
+
+Get all the Bookings Intervals
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| id       | int    | no       | Filter by ID                                                |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/bookingsIntervals -G \
+ -u user:key \
+ -d tenant=demo \
+```
+
+### saveBookingsInterval
+
+Store or update a Booking Interval
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveBookingsInterval \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Name\",\"idResourceType\":\"1\",\"duration\":\"10\",\"priority\":\"1\",\"bgcolor\":\"#bac0ba\"}"
+```
+
+### bookingsViews
+
+Get all the Bookings Views
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| id       | int    | no       | Filter by ID                                                |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/bookingsView -G \
+ -u user:key \
+ -d tenant=demo \
+```
+
+### saveBookingsView
+
+Store or update a Booking View
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveBookingsView \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Name\",\"priority\":\"1\",\"pixelsPerMin\":\"1\",\"hourColumnInterval\":\"1\"}"
+```
+
+### saveBookingsTypeTag
+
+Store or update a Booking View
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveBookingsTypeTag \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"idTag\":1,\"idTag\":1}"
+```
+
 
 ## Terms of Service
 
