@@ -105,6 +105,10 @@ For example:
  - [Get Bookings Views](#bookingsViews)
  - [Save Booking View](#saveBookingsView)
  - [Save Bookings Type Tag](#saveBookingsTypeTag)
+ - [Get Bookings Configurations](#bookingsConfig)
+ - [Save Booking Configuration](#saveBookingsConfig)
+ - [Get Bookings Stocks](#bookingsStocks)
+ - [Save Booking Stock](#saveBookingsStock)
 
  
 ---------------------------
@@ -2638,7 +2642,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsTypes -G \
+curl https://mt.golfmanager.es/api/bookingsResourceTypes -G \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2660,7 +2664,7 @@ Example:
 curl https://mt.golfmanager.es/api/saveBookingsResourceType \
  -u user:key \
  -d tenant=demo \
- -d data="{\"name\":\"My Name\",\"onlineAllSlots\":\"0\",\"selectHourThenResource\":\"0\"}"
+ -d data="{\"name\":\"My Name\",\"slots\":\"4\"}"
 ```
 
 
@@ -2767,9 +2771,88 @@ curl https://mt.golfmanager.es/api/saveBookingsView \
  -d data="{\"name\":\"My Name\",\"priority\":\"1\",\"pixelsPerMin\":\"1\",\"hourColumnInterval\":\"1\"}"
 ```
 
+### bookingsConfigs
+
+Get all the Bookings Configurations
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/bookingsConfig -G \
+ -u user:key \
+ -d tenant=demo \
+```
+
+### saveBookingsConfig
+
+Store or update a Bookings Configuration
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveBookingsConfig \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"name\":\"My Name\",\"idClient\":1,\"idType\":1,\"maxReservationsPerDay\":1}"
+```
+
+### bookingsStocks
+
+Get all the Bookings Stocks
+
+Method: GET
+
+| Argument       | Type   | Required | Description                                                 |
+| -------------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant         | string | yes      | Tenant name                                                 |
+| offset         | int    | no       | The offset of the first row to be returned                  |
+| count          | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| idResourceType | int    | no       | Filter by resource type                                     |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/bookingsStock -G \
+ -u user:key \
+ -d tenant=demo \
+```
+
+### saveBookingsStock
+
+Store or update a Booking Stock
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveBookingsStock \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"idResourceType\":1,\"name\":\"My Name\",\"priority\":1,\"stock\":1,\"start\":\"1\"}"
+```
+
 ### saveBookingsTypeTag
 
-Store or update a Booking View
+Store or update a Booking Type Tag
 
 Method: POST
 
