@@ -109,6 +109,10 @@ For example:
  - [Save Booking Configuration](#saveBookingsConfig)
  - [Get Bookings Stocks](#bookingsStocks)
  - [Save Booking Stock](#saveBookingsStock)
+ - [Delivery Notes](#deliverynotes)
+ - [Save Delivery Note](#savedeliverynote)
+ - [Delivery Lines](#deliverylines)
+ - [Save Delivery Line](#savedeliveryline)
 
  
 ---------------------------
@@ -1222,6 +1226,7 @@ Method: GET
 | tenant          | string | yes      | Tenant name                                                 |
 | id              | number | no       | Search clients by id (exact match)                          |
 | email           | string | no       | Search clients by email (exact match)                       |
+| phone           | string | no       | Search clients by phone (exact match)                       |
 | search          | string | no       | Search clients by name (contains)                           |
 | centerCard      | string | no       | Search clients by center card (exact match)                 |
 | memberCode      | string | no       | Search clients by member code (exact match)                 |
@@ -2868,6 +2873,141 @@ curl https://mt.golfmanager.es/api/saveBookingsTypeTag \
  -d tenant=demo \
  -d data="{\"idTag\":1,\"idTag\":1}"
 ```
+
+### DeliveryNotes
+
+List delivery notes
+
+Method: GET
+
+| Argument   | Type   | Required | Description                                                 |
+| ---------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant     | string | yes      | Tenant name                                                 |
+| id         | int    | no       | Get delivery note by id                                    |
+| offset     | int    | no       | The offset of the first row to be returned                  |
+| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/products \
+ -u user:key \
+ -d tenant=demo \
+```
+
+Response:
+
+Return a list of delivery notes:
+
+| Argument | Type   | Description      |
+| -------- | ------ | ---------------- |
+| id       | int    | The product id   |
+| name     | string | The product name |
+
+Example:
+
+```json
+[
+  {
+    "comments": null,
+    "date": "2022-09-08T22:00:00Z",
+    "description": null,
+    "id": 110,
+    "idSupplier": null,
+    "idWarehouse": 1,
+    "number": null,
+    "status": 1,
+  }
+]
+```
+
+### SaveDeliveryNote
+
+Create or update a delivery note
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveDeliveryNote \
+ -u user:key \
+ -d tenant=demo \
+ -d data='{"idWarehouse":1,"status":1,"date":"2022-09-09"}'
+```
+
+Returns the id of the delivery note
+
+
+### DeliveryLines
+
+List delivery lines
+
+Method: GET
+
+| Argument   | Type   | Required | Description                                                 |
+| ---------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant     | string | yes      | Tenant name                                                 |
+| idDelivery | int    | no       | Get delivery lines by delivery note id                      |
+| offset     | int    | no       | The offset of the first row to be returned                  |
+| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/deliverylines \
+ -u user:key \
+ -d tenant=demo \
+```
+
+Response:
+
+Return a list of delivery lines:
+
+| Argument   | Type   | Description      |
+| ---------- | ------ | ---------------- |
+| id         | int    | The product id   |
+| idDelivery | string | The product name |
+
+Example:
+
+```json
+[
+  {
+    "id": 257,
+    "idDelivery": 109,
+    "idProduct": 1800,
+    "netUnitCost": 3.25,
+    "quantity": 2,
+    "received": 1,
+  }
+]
+```
+
+### SaveDeliveryLine
+
+Create or update a delivery line
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveDeliveryLine \
+ -u user:key \
+ -d tenant=demo \
+ -d data='{"idDelivery":110,"quantity":110,"received":4,"idProduct":1801,"netUnitCost":2}'
+```
+
+Returns the id of the delivery note
 
 
 ## Terms of Service
