@@ -2017,6 +2017,7 @@ Method: POST
 | tenant         | string | yes      | Tenant name                                    |
 | idClient       | int    | yes      | The client id                                  |
 | paymentMethod  | string | no       | Payment method used to pay for the lines       |
+| idVoucher      | int    | no       | The id of the voucher if paying with one       |
 | parentName     | int    | no       | Referer name                                   |
 | idParent       | int    | no       | Referer id                                     |
 | idCashRegister | int    | no       | Cash register id                               |
@@ -2331,10 +2332,11 @@ Get all vouchers
 
 Method: GET
 
-| Argument | Type   | Required | Description              |
-| -------- | ------ | -------- | ------------------------ |
-| tenant   | string | yes      | Tenant name              |
-| id       | int    | no       | The voucher object id    |
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| id       | int    | no       | The voucher object id                                       |
+| idClient | int    | no       | Get vouchers by id client                                   |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
