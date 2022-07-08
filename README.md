@@ -2029,7 +2029,7 @@ Example:
 curl https://mt.golfmanager.es/api/createSale \
  -u user:key \
  -d tenant=demo \
- -d salelines='{ "idProduct": 1, "quantity": 2 }' \
+ -d salelines='[{ "idProduct": 1, "quantity": 2 }]' \
  -d idClient=1 \
  -d paymentMethod=Visa
 ```
