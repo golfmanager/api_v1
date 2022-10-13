@@ -1,22 +1,22 @@
 # System
 
-## Descripción 
+## Descripción
 Nombre meta: Sistema
 
 Funcionalidades básicas del sistema
 
 ## Instalación
 Instalado por defecto con la inicialización de la aplicación.
-## Entidades 
-* Country 
+## Entidades
+* Country
 
-* Región 
+* Región
 
 * Templates
 
 * TemplateTypes
 
-* EmailAcount: 
+* EmailAcount:
 
     Puertos habituales: 587, 465 y 25
 
@@ -26,9 +26,9 @@ Instalado por defecto con la inicialización de la aplicación.
 
 * Settings
 
-* VirtualSettings: 
-    Formatos de texto, ejemplo: 
-    
+* VirtualSettings:
+    Formatos de texto, ejemplo:
+
 ```
     S.buildFlash("info", `Format examples:
                         DecimalSeparator: .
@@ -46,26 +46,26 @@ Instalado por defecto con la inicialización de la aplicación.
 
 * Plugin
 
-* TermsPage
+* CustomPage
 
 * Apps: system a su vez maneja la sección de App Center para instalar o desinstalar los plugins.
 
-## Opciones avanzadas 
+## Opciones avanzadas
 
-**bookings.rememberType**  
-Value: true/false  
+**bookings.rememberType**
+Value: true/false
 Prevent remember the reservation type for a client in the timetable
 
-**bookings.preventPastDates**  
-Value: true/false  
+**bookings.preventPastDates**
+Value: true/false
 Prevent making reservations on past dates
 
-**bookings.allowAnyName**  
-Value: true/false  
+**bookings.allowAnyName**
+Value: true/false
 Allow anonymous reservations in admin
 
-**bookings.salesPendingPaymentAlert**  
-Value: true/false  
+**bookings.salesPendingPaymentAlert**
+Value: true/false
 Show an alert when there are past sales pending payment
 
 **bookings.onlyPrintIfCheckin**
@@ -75,6 +75,14 @@ Only allow reservations to be printed if they've been set as checked in
 **bookings.checkinCountryReminder**
 Value: true/false
 Display a message if the reservation client doesn't have a country when doing a check in
+
+**bookings.crossoversInTemplates**
+Value: true/false
+Include crossovers in templates
+
+**bookings.dontAutoConfirm**
+Value: true/false
+Don't auto confirm reservations with price zero.
 
 -----
 
@@ -94,8 +102,8 @@ Value: Client group ID
 Plugin: consumer
 Only clients from this group will have their names displayed in /consumer
 
-**ebookings.showPastHours**  
-Value: true/false  
+**ebookings.showPastHours**
+Value: true/false
 Show past hours when browsing the current day.
 
 **ebookings.hideHomePagePrices**
@@ -111,8 +119,8 @@ Show price name in consumer/ebookings
 Value: true/false
 When a reservation type has the same min/max restriction, show the price of the entire package.
 
-**ebookings.membershipClientTag**  
-Value: string  
+**ebookings.membershipClientTag**
+Value: string
 Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
 
 **ebookings.requireReservation**
@@ -125,49 +133,49 @@ Include the billing.idOnlineCashRegister in online salelines
 
 -----
 
-**billing.preventPastChanges**  
-Value: true/false  
+**billing.preventPastChanges**
+Value: true/false
 Prevent changing past sales (past refers to useDate)
 
-**billing.dueDateAsUseDate**  
-Value: true/false              
+**billing.dueDateAsUseDate**
+Value: true/false
 Set saleline dueDate as createDate or useDate by default
 
-**billing.cancelInvoiceTickets**   
-Value: true/false  
+**billing.cancelInvoiceTickets**
+Value: true/false
 If the system cancels existing tickets when generating an invoice.
 
-**billing.autoSetOnCredit**  
-Value: true/false  
+**billing.autoSetOnCredit**
+Value: true/false
 Automatically add a line as on credit when a client has onCredit enabled.
 
-**billing.requirePermissionToUpdatePastSales**  
-Value: true/false  
+**billing.requirePermissionToUpdatePastSales**
+Value: true/false
 Require changePastUsedateSales permission to update sales with useDate in the past.
 
-**billing.requirePermissionToUpdatePastCreatedSales**  
-Value: true/false  
+**billing.requirePermissionToUpdatePastCreatedSales**
+Value: true/false
 Require changePastCreateDateSales permission to update sales with createDate in the past.
 
-**billing.paymentAfterUseDate**  
-Value: true/false  
+**billing.paymentAfterUseDate**
+Value: true/false
 Don't generate a payment when any line has useDate in the future. They payment will be saved as a payment on account.
 When the date comes and you try to pay again (with the partial or full payment on account) the payment will be generated.
 
-**billing.skipTicketOnPayment**  
-Value: true/false  
+**billing.skipTicketOnPayment**
+Value: true/false
 Skip creating a ticket when paying for salelines set in the future.
 
-**billing.generateInvoiceAndTicket**  
+**billing.generateInvoiceAndTicket**
 Value: Series Id
 Automatically generate an invoice and a ticket/receipt when making a payment.
 
-**billing.idDefaultClient**  
-Value: Client Id  
+**billing.idDefaultClient**
+Value: Client Id
 Use this client by default on sales where the client is null. Required by billing.generateInvoiceAndTicket.
 
-**billing.idOnlineCashRegister**  
-Value: Cash Register Id  
+**billing.idOnlineCashRegister**
+Value: Cash Register Id
 Use this cash register for online sales. Required by billing.generateInvoiceAndTicket.
 
 **billing.enableTipping**
@@ -184,7 +192,7 @@ A payment method with a cash gateway, enabled, not deleted, not secondary curren
 
 **billing.payPastUsedateSales**
 Value: true/false
-Allows you to pay sales from the past 
+Allows you to pay sales from the past
 
 **billing.alwaysGenerateTicket**
 Value: true/false
@@ -194,26 +202,34 @@ Always generate ticket (including total paid zero & all virtual payments)
 Value: Product Id
 Generate a sale line instead of a payment on account (incompatible with billing.skipTicketOnPayment)
 
+**billing.createZeroPayment**
+Value: true/false
+Creates a payment with amount zero when the lines being paid add up to zero.
+
+**billing.requireTimeoutOnPayByEmail**
+Value: true/false
+Makes expiration date a required field when sending payments by email
+
 -----
 
-**eshop.thankyouPage**  
-Value: a url  
-Plugin: consumer  
-The url to redirect to after a successful purchase.  
+**eshop.thankyouPage**
+Value: a url
+Plugin: consumer
+The url to redirect to after a successful purchase.
 
-**selectRowsByPage**  
-Value: true/false   
-Plugin: slib   
-Public: true   
+**selectRowsByPage**
+Value: true/false
+Plugin: slib
+Public: true
 Select rows all rows int the page versus all rows in the search.
 
 -----
 
-**pos.showCashierLastSession**  
+**pos.showCashierLastSession**
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list
 
-**pos.showCashierLastSession**  
+**pos.showCashierLastSession**
 Value: true/false
 Show data from the last cash register session only in /admin/pos/list
 
@@ -239,7 +255,7 @@ Show the client's vouchers in the class detail popup
 
 **stock.autoUpdateAverageCost**
 Value: true/false
-Recalculates the average cost of a product after every transaction 
+Recalculates the average cost of a product after every transaction
 
 -----
 

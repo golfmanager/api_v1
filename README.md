@@ -2,7 +2,7 @@
 
 ## Authentication
 
-Authentication is performed via HTTP Basic Auth. 
+Authentication is performed via HTTP Basic Auth.
 
 All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
 
@@ -16,7 +16,7 @@ Our API raise exceptions for many reasons, such as a failed charge, invalid para
 
 ## Dates
 
-The date format is ISO 8601 and can be passed in the local time of the tenant or in UTC. 
+The date format is ISO 8601 and can be passed in the local time of the tenant or in UTC.
 
 For example:
 
@@ -24,97 +24,119 @@ For example:
 
 2018-10-09T07:00:00.000Z
 
+## Local Development
+
+To develop and test the API when developing locally, the developer needs to do the following to set it up:
+
+1. Open the [superadmin localhost]([localhost superadmin](http://localhost:8080/admin/superadmin)) in your browser.
+
+2. Go to the [Hosts page](http://localhost:8080/admin/superadmin/host) and add the following host if it doesn't exist yet:
+  - **tenant:** mt
+  - **host:** 127.0.0.99
+
+3. Go to the ApiKeys page of our [localhost superadmin](http://localhost:8080/admin/superadmin/apikey) and generate a pair of keys, one for your **admin** requests and another for your **consumer** requests:
+  - **name:** first name character + surname + _admin/consumer
+  - **type:** admin/consumer
+
+4. Save the user & password returned when generating each apiKey. This will be the one you'll need to perform the HTTP Basic Authentication.
+
+> **NOTE:** You can copy the username afterwards, but not the password. However, you can reset the password too afterwards.
+
+5. Click on the newly generated api key, and move to the **tenants** tab.
+
+6. Click on "New" and add one of your local tenants, and an ApiKey that you are indicated. Otherwise, ask the Dev Team about your API Key.
 
 ---------------------------
 
- - [Tenants](#tenants)
+> **ATENCIÓN:** Por defecto, los endpoints añadidos con `web.addApi` desde el servidor aplican un filtro de privilegios **admin** exclusivamente, salvo que se indique lo contrario al añadirlo con `web.addApi` con un parámetro `filter`.
 
-## Consumer API
+> **INFO:** El endpoint y la lógica de /tenants está gestionada en el archivo [src/libs/stdlib/server.ts](../../libs/stdlib/server.ts), dentro de la función `serveApi`, y no se encuentra como el resto de endpoints en el archivo [src/api/server/main.ts](./main.ts)
 
- - [Tenant](#tenant)
- - [Search availability](#availability)
- - [extras](#extras)
- - [List reservation types](#listreservationtypes)
- - [Resources](#resources)
- - [Make reservations](#makereservations)
- - [Confirm reservations](#confirmreservations)
- - [Cancel reservations](#cancelreservations)
- - [Sale information](#saleinfo) 
- - [Bookings](#bookings)
+| Name | Method | Endpoint | Privilege | Resource |
+| - | - | - | - | - |
+| [Tenants](#tenants) | GET | /tenants | - |
+| [Tenant](#tenant) | GET | /tenant | consumer, admin |
+| [Search Availability](#availability) | GET | /searchAvailability | consumer, admin | bookings
+| [extras](#extras) | GET | /extras | consumer | bookings |
+| [List reservation types](#listreservationtypes) | GET | /availabilityTypes | consumer | bookings |
+| [Resources](#resources) | GET | /resources | consumer, admin | bookings |
+| [Save Resources](#saveResources) | POST | /saveResources | consumer, admin | bookings |
+| [Make reservations](#makereservations) | POST | /makeReservation | consumer | bookings |
+| [Confirm reservations](#confirmreservations) | POST | /confirmReservation | consumer | bookings |
+| [Cancel reservations](#cancelreservations) | POST | /confirmReservation | consumer | bookings |
+| [Sale information](#saleinfo) | GET | /sale | consumer | bookings |
+| [Bookings](#bookings) | GET | /bookings | consumer | bookings |
+| [Reservation types](#reservationtypes) | GET | /reservationtypes | admin | - |
+| [Teesheet Rules](#teesheetrules) | GET | /teesheetRules | admin | - |
+| [Reservations](#reservations) | GET | /reservations | admin | - |
+| [Clients](#clients) | GET | /clients | admin | - |
+| [Clients Full](#clientsfull) | GET | /clientsFull | admin | - |
+| [Save client](#SaveClient) | POST | /saveClient | admin | - |
+| [ClientGroups](#clientgroups) | GET | /clientGroups| admin | - |
+| [Save ClientGroups](#saveclientgroups) | GET | /saveClientGroups | admin | - |
+| [Client tags](#clientTags) | GET | /clientTags | admin | - |
+| [Save tag](#savetag) | POST | /saveTag | admin | - |
+| [Save client tags](#saveclienttags) | GET | /saveClientTags | admin | - |
+| [Delete client tag](#deleteclienttag) | GET | /deleteClientTag | admin | - |
+| [Products](#products) | GET | /products | admin | - |
+| [Save Products](#saveproducts) | POST | /saveProduct | admin | - |
+| [Families (Departments)](#families) | GET | /families | admin | - |
+| [Save Family (Department)](#savefamily) | POST | /saveFamily | admin | - |
+| [Subfamilies](#subfamilies) | GET | /subfamilies | admin | - |
+| [Save Subfamilies](#SaveSubFamilies) | POST | /saveSubfamily | admin | - |
+| [Payments](#payments) | GET | /payments | admin | - |
+| [Get Payment Methods](#paymentmethods) | GET | /paymentMethods | admin | - |
+| [Save Payment Method](#savePaymentmethod) | POST | /savePaymentMethod | admin | - |
+| [Salelines](#salelines) | GET | /salelines | admin | - |
+| [ConfirmSalelines](#confirmSalelines) | POST | /confirmSalelines | admin | - |
+| [Invoices](#invoices) | GET | /invoices | admin | - |
+| [Tickets](#tickets) | GET | /tickets | admin | - |
+| [Prices](#prices) | GET | /prices | admin | - |
+| [Save price](#saveprice) | POST | /savePrice | admin | - |
+| [Delete prices](#deleteprices) | POST | /deletePrice | admin | - |
+| [New sale](#newSale) | POST | /newSale | admin | - |
+| [Create sale](#createSale) | POST | /createSale | admin | - |
+| [Cancel sales](#cancelSales) | POST | /cancelSales | admin | - |
+| [Blockouts](#blockouts) | GET | /blockouts | admin | - |
+| [Blockout](#blockout) | POST | /blockout | admin | - |
+| [Cancel blockout](#cancelblockout) | POST | /cancelblockout | admin | - |
+| [Tax Types](#taxtypes) | GET | /taxTypes | admin | - |
+| [Save Tax Types](#savetaxtypes) | POST | /taxTypes | admin | - |
+| [Get Memberships](#memberships) | GET | /membership | admin | - |
+| [Save Memberships](#saveMemberships) | POST | /saveMembership | admin | - |
+| [Get Membership Clients](#membershipClient) | GET | /membershipClient | admin | - |
+| [Sale Membership to Clients](#saleMembership) | POST | /saleMembership | admin | - |
+| [Get Voucher](#vouchers) | GET | /vouchers | admin | - |
+| [Save Voucher](#saveVoucher) | POST | /saveVoucher | admin | - |
+| [Get Voucher Products](#voucherProducts) | GET | /voucherProducts | admin | - |
+| [Save Voucher Product](#saveVoucherProduct) | POST | /saveVoucherProduct | admin | - |
+| [Get Voucher Movement](#voucherMovements) | GET | /voucherMovements | admin | - |
+| [Get Voucher Recharge](#voucherRecharges) | GET | /voucherRecharges | admin | - |
+| [Save Voucher Recharge](#saveVoucherRecharge) | POST | /saveVoucherRecharge | admin | - |
+| [Get Voucher Types](#voucherTypes) | GET | /voucherTypes | admin | - |
+| [Save Voucher Type](#saveVouchertype) | POST | /saveVoucherType | admin | - |
+| [Get Areas](#areas) | GET | /areas | admin | - |
+| [Save Area](#saveArea) | POST | /saveArea | admin | - |
+| [Get Bookings Types](#bookingsTypes) | GET | /bookingsTypes | admin | - |
+| [Save Booking Type](#saveBookingsType) | POST | /saveBookingsType | admin | - |
+| [Get Bookings Resource Types](#bookingsResourceTypes) | GET | /bookingsResourceTypes | admin | - |
+| [Save Booking Resource Type](#saveBookingsResourceType) | POST | /saveBookingsResourceType | admin | - |
+| [Get Bookings Intervals](#bookingsIntervals) | GET | /bookingsIntervals | admin | - |
+| [Save Booking Interval](#saveBookingsInterval) | POST | /saveBookingsInterval | admin | - |
+| [Get Bookings Views](#bookingsViews) | GET | /bookingsView | admin | - |
+| [Save Booking View](#saveBookingsView) | POST | /saveBookingsView | admin | - |
+| [Save Bookings Type Tag](#saveBookingsTypeTag) | POST | /saveBookingsTypeTag | admin | - |
+| [Get Bookings Configurations](#bookingsConfig) | GET | /bookingsConfig | admin | - |
+| [Save Booking Configuration](#saveBookingsConfig) | POST | /saveBookingsConfig | admin | - |
+| [Get Bookings Stocks](#bookingsStocks) | GET | /bookingsStock | admin | - |
+| [Save Booking Stock](#saveBookingsStock) | POST | /saveBookingsStock | admin | - |
+| [Delivery Notes](#deliverynotes) | GET | /deliveryNotes | admin | - |
+| [Save Delivery Note](#savedeliverynote) | POST | /saveDeliveryNote | admin | - |
+| [Delivery Lines](#deliverylines) | GET | /deliveryLines | admin | - |
+| [Save Delivery Line](#savedeliveryline) | POST | /saveDeliveryLine | admin | - |
+| [Cart](#cart) | GET | /cart | - | - |
+| [Get Blog Posts](#getBlogPosts) | GET | /blog/posts | admin | - |
 
- ## Admin API
- - [Tenant](#tenant)
- - [Search availability](#availability)
- - [Reservation types](#reservationtypes)
- - [Resources](#resources)
- - [Teesheet Rules](#teesheetrules)
- - [Reservations](#reservations)
- - [Save client](#SaveClient)
- - [Save tag](#savetag)
- - [Clients](#clients)
- - [Clients Full](#clientsfull)
- - [ClientGroups](#clientgroups)
- - [Save ClientGroups](#saveclientgroups)
- - [Save client tags](#saveclienttags)
- - [Delete client tag](#deleteclienttag)
- - [Products](#products)
- - [Save Products](#saveproducts)
- - [Families (Departments)](#families)
- - [Save Family (Department)](#savefamily)
- - [Subfamilies](#subfamilies)
- - [Save Subfamilies](#SaveSubFamilies)
- - [Payments](#payments)
- - [Salelines](#salelines)
- - [Invoices](#invoices)
- - [Tickets](#tickets)
- - [Prices](#prices)
- - [Save price](#saveprice)
- - [Delete prices](#deleteprices)
- - [Discounts](#discounts)
- - [Save discount](#savediscount)
- - [New sale](#newSale)
- - [Create sale](#createSale)
- - [Cancel sales](#cancelSales)
- - [Blockouts](#blockouts)
- - [Blockout](#blockout)
- - [Cancel blockout](#cancelblockout)
- - [Tax Types](#taxtypes)
- - [Save Tax Types](#savetaxtypes)
- - [Get Memberships](#memberships)
- - [Save Memberships](#saveMemberships)
- - [Get Payment Methods](#paymentmethods)
- - [Save Payment Method](#savePaymentmethod)
- - [Get Voucher](#vouchers)
- - [Save Voucher](#saveVoucher)
- - [Get Voucher Products](#voucherProducts)
- - [Save Voucher Product](#saveVoucherProduct)
- - [Get Voucher Movement](#voucherMovements)
- - [Get Voucher Recharge](#voucherRecharges)
- - [Save Voucher Recharge](#saveVoucherRecharge)
- - [Get Voucher Types](#voucherTypes)
- - [Save Voucher Type](#saveVouchertype)
- - [Get Areas](#areas)
- - [Save Area](#saveArea)
- - [Get Bookings Types](#bookingsTypes)
- - [Save Booking Type](#saveBookingsType)
- - [Get Bookings Resource Types](#bookingsResourceTypes)
- - [Save Booking Resource Type](#saveBookingsResourceType)
- - [Get Blog Posts](#getBlogPosts)
- - [Get Bookings Intervals](#bookingsIntervals)
- - [Save Booking Interval](#saveBookingsInterval)
- - [Get Bookings Views](#bookingsViews)
- - [Save Booking View](#saveBookingsView)
- - [Save Bookings Type Tag](#saveBookingsTypeTag)
- - [Get Bookings Configurations](#bookingsConfig)
- - [Save Booking Configuration](#saveBookingsConfig)
- - [Get Bookings Stocks](#bookingsStocks)
- - [Save Booking Stock](#saveBookingsStock)
- - [Delivery Notes](#deliverynotes)
- - [Save Delivery Note](#savedeliverynote)
- - [Delivery Lines](#deliverylines)
- - [Save Delivery Line](#savedeliveryline)
-
- 
 ---------------------------
 
 
@@ -156,7 +178,7 @@ Method: GET
 
 If idResourceType is omitted, the first resource type ordered by idResourceType is used.
 
-List of valid tags: 
+List of valid tags:
 
     18holes
     9holes
@@ -233,7 +255,7 @@ Example:
     "resourceName": "Tee 1",
     "resourceTags": [],
     "tags": [
-      "18holes", 
+      "18holes",
       "tee1"
     ]
   },
@@ -264,7 +286,7 @@ Example:
     "resourceName": "Tee 10",
     "resourceTags": [],
     "tags": [
-      "18holes", 
+      "18holes",
       "buggy"
     ]
   }
@@ -285,7 +307,7 @@ Example:
 ```bash
 curl https://mt.golfmanager.es/api/availabilityTypes \
  -u user:key \
- -d tenant=demo 
+ -d tenant=demo
 ```
 
 Or filtering by tag:
@@ -324,7 +346,7 @@ Response:
         ]
     }
 ]
-``` 
+```
 
 
 
@@ -385,7 +407,7 @@ Response:
     "rack": 22
   }
 ]
-``` 
+```
 
 
 
@@ -464,7 +486,7 @@ Example:
         }
     ]
 }
-``` 
+```
 
 
 <h2 id="confirmreservations">Confirm reservations</h2>
@@ -501,7 +523,7 @@ Example:
 
 ```json
 { "success": true }
-``` 
+```
 
 
 <h2 id="cancelreservations">Cancel reservations</h2>
@@ -527,7 +549,7 @@ Example:
 
 ```json
 { "success": true }
-``` 
+```
 
 
 
@@ -563,7 +585,7 @@ Response:
         }
     ]
 }
-``` 
+```
 
 ### Bookings
 
@@ -723,7 +745,7 @@ Example:
         "resourceTypeName": "Green fees",
         "start": null,
         "tags": "18holes",
-        "weekDays": 127, 
+        "weekDays": 127,
         "resources": [],
         "extras": []
     }
@@ -735,6 +757,57 @@ Example:
 List resources
 
 Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| search   | string | no       | Search resources by text                                      |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/resources \
+ -u user:key \
+ -d tenant=demo
+```
+
+Response:
+If the `hideOnline` property is set to true, the resource must not be used to create reservations even if it shows availability.
+
+Example:
+
+```json
+[
+    {
+        "id": 1,
+        "idResourceType": 1,
+        "name": "Tee 1",
+        "hideOnline": false,
+        "resourceTypeName": "Green fees",
+        "tags": [
+            "tee1"
+        ]
+    },
+    {
+        "id": 2,
+        "idResourceType": 1,
+        "name": "Tee 10",
+        "hideOnline": true,
+        "resourceTypeName": "Green fees",
+        "tags": [
+            "tee10"
+        ]
+    }
+]
+```
+
+<h2 id="saveResources">Save Resources</h2>
+
+Save resources
+
+Method: POST
 
 | Argument | Type   | Required | Description                                                 |
 | -------- | ------ | -------- | ----------------------------------------------------------- |
@@ -779,7 +852,6 @@ Example:
     }
 ]
 ```
-
 
 <h2 id="teesheetRules">Teesheet Rules</h2>
 
@@ -1138,6 +1210,38 @@ Response:
 The ID if it is created. Nothing if it is an update.
 
 
+### Client Tags
+
+<h2 id="clientTags">Save tag</h2>
+
+List client groups
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/clientTags \
+ -u user:key \
+ -d tenant=demo
+```
+
+Response:
+
+```json
+[
+    {
+      //TODO...
+    }
+]
+```
+
 ### SaveTag
 
 <h2 id="savetag">Save tag</h2>
@@ -1180,7 +1284,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/clients \
+curl -X GET https://mt.golfmanager.es/api/clients \
  -u user:key \
  -d tenant=demo \
  -d search=a \
@@ -1637,6 +1741,24 @@ Example:
 ]
 ```
 
+<h2 id="confirmSalelines">Confirm Salelines</h2>
+
+Mark salelines as paid.
+
+Method: POST
+
+| Argument | Type  | Required | Description        |
+| -------- | ----- | -------- | ------------------ |
+| ids      | int[] | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/confirmSalelines \
+ -u user:key \
+ -d tenant=demo \
+-d ids=[1,2]
+ ```
 
 ### Invoices
 
@@ -1862,87 +1984,6 @@ curl https://mt.golfmanager.es/api/deletePrices \
 ```
 
 
-### Discounts
-
-List discounts
-
-Method: GET
-
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| offset   | int    | no       | The offset of the first row to be returned                  |
-| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
-
-Example:
-
-```bash
-curl https://mt.golfmanager.es/api/discounts \
- -u user:key \
- -d tenant=demo
-```
-
-Response:
-
-Example:
-
-```json
-[
-    {
-        "channel": null,
-        "end": null,
-        "endTime": null,
-        "holiday": false,
-        "id": 1,
-        "idAgeGroup": null,
-        "idClient": null,
-        "idClientGroup": null,
-        "idFamilySales": null,
-        "idMembership": null,
-        "idProduct": 1,
-        "maxAdvance": null,
-        "maxSales": null,
-        "minAdvance": null,
-        "minSales": null,
-        "name": "Twilight",
-        "percent": 10,
-        "priority": 0,
-        "rounding": null,
-        "start": null,
-        "startTime": null,
-        "weekdays": 0
-    }
-]
-```
-
-
-
-
-
-<h2 id="savediscount">Save discount</h2>
-
-Save a discount. If it has an id it will update it, otherways it will create a new one.
-
-Method: POST
-
-| Argument | Type | Required | Description        |
-| -------- | ---- | -------- | ------------------ |
-| data     | json | yes      | The object as json |
-
-Example:
-
-```bash
-curl https://mt.golfmanager.es/api/saveDiscount \
- -u user:key \
- -d tenant=demo \
- -d data="{\"idProduct\":1,\"name\":\"Twilight\",\"percent\":100,\"priority\":0,\"weekDays\":127}"
-```
-
-Response:
-
-The ID if it is created. Nothing if it is an update.
-
-
 
 
 
@@ -2080,7 +2121,7 @@ curl https://mt.golfmanager.es/api/cancelSales \
 
 ### blockouts
 
-List blockouts 
+List blockouts
 
 Method: GET
 
@@ -2097,7 +2138,7 @@ Example:
 curl https://mt.golfmanager.es/api/blockouts \
  -u user:key \
  -d tenant=demo
- -d idResource=2 
+ -d idResource=2
  -d start='2019-04-12'
 ```
 
@@ -2143,7 +2184,7 @@ Example:
 
 ### blockout
 
-Block slots in the occupation table 
+Block slots in the occupation table
 
 Method: POST
 
@@ -2192,7 +2233,7 @@ Example:
 
 <h2 id="cancelblockout">Cancel blockout</h2>
 
-Cancel a blockout by ID 
+Cancel a blockout by ID
 
 Method: POST
 
@@ -2204,7 +2245,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/blockout \
+curl https://mt.golfmanager.es/api/cancelblockout \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2304,26 +2345,56 @@ Available period values:
 
 ---------------------------
 
-<h2 id="memberships">Get Memberships</h2>
+<h2 id="membershipClient">Get Membership Client</h2>
 
-Get all memberships
+Get all membership clients.
 
 Method: GET
 
 | Argument | Type   | Required | Description                                                 |
 | -------- | ------ | -------- | ----------------------------------------------------------- |
 | tenant   | string | yes      | Tenant name                                                 |
-| id       | int    | no       | The membership object id                                    |
+| id       | int    | no       | The membership client object id                                    |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| start    | datetime | yes    | Start date and time for membership |
+| end      | datetime | yes    | End date and time for membership   |
+| idParent | int      | no     | Filter by clients |
+| idMembership | int  | no     | Filter membership clients by memberships |
+| idParent | int      | no     | Filter membership clients by parent |
+| activated | int     | no     | Filter membership clients by activation status |
 
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/membership \
+curl https://mt.golfmanager.es/api/membershipClient \
  -u user:key \
  -d tenant=demo \
  -d id=1
+```
+
+<h2 id="saleMembership">Sale Membership to Client</h2>
+
+Create or update a Membership Client (and its sale)
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+| idSale   | int  | no       | If available, the id of the sale you want it to assign to |
+| paid     | bool | no       | If true, it will mark the client as activated |
+
+NOTE: If you mark a membershipClient as paid, a new sale will be generated either way (with a price of 0€). If desired, the saleline can be confirmed by passing the returned id to the `confirmSalelines` endpoint.
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saleMembership \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"start\": \"2022-07-15T23:00:00Z\", \"description\": null, \"idBankAccount\": null, \"idClient\": 1, \"idMembership\": 1}"
+ -d paid=true
 ```
 
 ### vouchers
@@ -2599,11 +2670,12 @@ Method: GET
 
 | Argument    | Type   | Required | Description                                                   |
 | --------    | ------ | -------- | ------------------------------------------------------------- |
-| tenant      | string | yes      | Tenant name                                                   |
-| id          | int    | no       | The Type object id to recover                                 |
-| offset      | int    | no       | The offset of the first row to be returned                    |
-| count       | int    | no       | The maximum number of rows to be returned. (default is 100)   |
-| includeTags | bool   | no       | Includes an array with the IDs of tags associated to the type |
+| tenant         | string | yes      | Tenant name                                                   |
+| id             | int    | no       | The Type object id to recover                                 |
+| offset         | int    | no       | The offset of the first row to be returned                    |
+| count          | int    | no       | The maximum number of rows to be returned. (default is 100)   |
+| includeTags    | bool   | no       | Includes an array with the IDs of tags associated to the type |
+| idResourceType | int    | no       | If included, returns the bookings Resource Types filtered by their ResourceType id |
 
 Example:
 
@@ -2645,6 +2717,7 @@ Method: GET
 | id          | int    | no       | The Type object id to recover                                 |
 | offset      | int    | no       | The offset of the first row to be returned                    |
 | count       | int    | no       | The maximum number of rows to be returned. (default is 100)   |
+| name        | string | no       | If included, returns the bookings Resource Types filtered by their name |
 
 Example:
 
@@ -2672,30 +2745,6 @@ curl https://mt.golfmanager.es/api/saveBookingsResourceType \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"slots\":\"4\"}"
-```
-
-
-### getBlogPosts
-
-If the tenant has the blog module installed, get all posts
-
-Method: GET
-
-| Argument | Type   | Required | Description                                                 |
-| -------- | ------ | -------- | ----------------------------------------------------------- |
-| tenant   | string | yes      | Tenant name                                                 |
-| search   | string | no       | Searchs by title                                            |
-| offset   | int    | no       | The offset of the first row to be returned                  |
-| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
-| priority | int    | no       | THe priority used to sort the blog posts                    |
-
-Example:
-
-```bash
-curl https://mt.golfmanager.es/api/blog/posts -G \
- -u user:key \
- -d tenant=demo \
- -d search="my search"
 ```
 
 ### bookingsIntervals
@@ -3011,13 +3060,54 @@ curl https://mt.golfmanager.es/api/saveDeliveryLine \
 
 Returns the id of the delivery note
 
+### getBlogPosts
+
+If the tenant has the blog module installed, get all posts
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| search   | string | no       | Searchs by title                                            |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| priority | int    | no       | THe priority used to sort the blog posts                    |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/blog/posts -G \
+ -u user:key \
+ -d tenant=demo \
+ -d search="my search"
+```
+
+### cart
+
+Returns...
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| idSale   | int | yes       |  ID of the sale                                            |
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/blog/posts -G \
+ -u user:key \
+ -d tenant=demo \
+ -d idSale=1
+```
 
 ## Terms of Service
 
 - Thank you for using Golfmanager! When you develop on the Golfmanager Platform,
-you agree to be bound by the following terms, so please read them carefully. 
+you agree to be bound by the following terms, so please read them carefully.
 
-- The API is provided as-is and without any warranty whatsoever. Golfmanager is not liable for any 
+- The API is provided as-is and without any warranty whatsoever. Golfmanager is not liable for any
 damage due to unavailable or incorrect APIs.
 
 - Whilst Golfmanager uses all reasonable endeavours to correct any errors or omissions on the
@@ -3025,10 +3115,10 @@ Golfmanager Platform as soon as practicable once they have been brought to Golfm
 attention, Golfmanager makes no promises, guarantees, representations or warranties of
 any kind whatsoever (express or implied).
 
-- Abuse or excessively frequent requests to Golfmanager via the API may result in 
+- Abuse or excessively frequent requests to Golfmanager via the API may result in
 the temporary or permanent suspension of your Account's access to the API. Golfmanager,
 in our sole discretion, will determine abuse or excessive usage of the API. We will make
 a reasonable attempt to warn you via email prior to suspension.
 
-- Golfmanager has the right to change these General API Terms and Conditions and 
+- Golfmanager has the right to change these General API Terms and Conditions and
 any Specific API Terms and Conditions.

@@ -58,6 +58,14 @@ Muestra las razones del descuento al aplicar un descuento.
 -----
 ## POS custom commands
 
+En client/pos.ts se declaran los comandos.
+En client/pos.ts -> renderCommandArg() se decide y dibuja su firma paramétrica
+Si se pone el nombre del plugin seguido de un punto, se indica que el comando está en otro plugin.
+El nombre del comando ha de coincidir con una función exported en el plugin al que hagamos referencia.
+Dentro de esa función, podemos hacer las operaciones que consideremos oportunas. 
+Si lo hacemos así hay que incluirlo en la lista de la función fixButtonCommand en el mismo archivo. 
+La función llamada espera dos parámetros; el primero son los datos propios del botón y el segundo es un objeto con datos de la venta arrastrados desde el TPV.
+
 Custom commands
 -----------
 
