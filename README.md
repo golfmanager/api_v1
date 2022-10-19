@@ -60,7 +60,7 @@ To develop and test the API when developing locally, the developer needs to do t
 | [extras](#extras) | GET | /extras | consumer | bookings |
 | [List reservation types](#listreservationtypes) | GET | /availabilityTypes | consumer | bookings |
 | [Resources](#resources) | GET | /resources | consumer, admin | bookings |
-| [Save Resources](#saveResources) | POST | /saveResources | consumer, admin | bookings |
+| [Save Resources](#saveResources) | POST | /saveResources | admin | bookings |
 | [Make reservations](#makereservations) | POST | /makeReservation | consumer | bookings |
 | [Confirm reservations](#confirmreservations) | POST | /confirmReservation | consumer | bookings |
 | [Cancel reservations](#cancelreservations) | POST | /confirmReservation | consumer | bookings |
@@ -136,7 +136,10 @@ To develop and test the API when developing locally, the developer needs to do t
 | [Save Delivery Line](#savedeliveryline) | POST | /saveDeliveryLine | admin | - |
 | [Cart](#cart) | GET | /cart | - | - |
 | [Get Blog Posts](#getBlogPosts) | GET | /blog/posts | admin | - |
-
+| [Save activity](#saveActivity) | POST | /saveActivity | admin | - |
+| [Delete activity](#deleteActivity) | POST | /deleteActivity | admin | - |
+| [Add client to activity](#addClientToActivity) | POST | /addClientToActivity | admin | - |
+| [Delete cliente from activity](#deleteClientFromActivity) | "POST" | /deleteClientFromActivity | admin | - |
 ---------------------------
 
 
@@ -1560,7 +1563,7 @@ curl https://mt.golfmanager.es/api/saveFamily \
 
 Response:
 
-The ID of the modified or created resource.
+The ID of the modified or created family.
 
 ### Subfamilies
 
@@ -2488,6 +2491,8 @@ Method: GET
 | id       | int    | no       | The voucher movement object id    |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+| fromDate | date   | no       | From this creation date |
+| toDate   | date   | no       | Until this creation date |
 
 ```bash
 curl https://mt.golfmanager.es/api/voucherMovements \
@@ -3101,6 +3106,103 @@ curl https://mt.golfmanager.es/api/blog/posts -G \
  -d tenant=demo \
  -d idSale=1
 ```
+
+### saveActivity
+
+Save an activity. If it has an id it will update it, otherways it will create a new one.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/saveActivity \
+ -u user:key \
+ -d tenant=demo \
+ -d data='{"name":"activity name","description":"activity description","start":"10/10/2022","idProduct":1801}'
+```
+
+Response:
+
+The ID of the modified or created family.
+
+Required properties:
+- name: string
+- start: datetime
+- description: string
+
+
+### deleteActivity
+
+Delete activity
+
+Method: POST
+
+| Argument | Type | Required | Description                |
+| -------- | ---- | -------- | -------------------------- |
+| id       | int  | yes      | Id of activity to delete   |
+
+Only activities created from the API can be deleted
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/deleteActivity \
+ -u user:key \
+ -d tenant=demo \
+ -d id=325
+```
+
+### addClientToActivity
+
+Add a client to an activity
+
+Method: POST
+
+| Argument   | Type | Required | Description        |
+| ---------- | ---- | -------- | ------------------ |
+| idClient   | int  | yes      | Client's ID        |
+| idActivity | int  | yes      | Activity's ID      |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/addClientToActivity \
+ -u user:key \
+ -d tenant=demo \
+ -d idClient=4274
+ -d idActivity=31
+```
+
+Response:
+
+The ID of the registration.
+
+### deleteClientFromActivity
+
+Delete a client from an activity
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| id       | int  | yes      | Registration ID    |
+
+Registration ID is the ID returned by addClientToActivity. 
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/api/deleteClientFromActivity \
+ -u user:key \
+ -d tenant=demo \
+ -d id=325
+```
+
 
 ## Terms of Service
 
