@@ -73,7 +73,7 @@ To develop and test the API when developing locally, the developer needs to do t
 | [Clients Full](#clientsfull) | GET | /clientsFull | admin | - |
 | [Save client](#SaveClient) | POST | /saveClient | admin | - |
 | [ClientGroups](#clientgroups) | GET | /clientGroups| admin | - |
-| [Save ClientGroups](#saveclientgroups) | GET | /saveClientGroups | admin | - |
+| [Save ClientGroups](#saveclientgroup) | GET | /saveClientGroup | admin | - |
 | [Client tags](#clientTags) | GET | /clientTags | admin | - |
 | [Save tag](#savetag) | POST | /saveTag | admin | - |
 | [Save client tags](#saveclienttags) | GET | /saveClientTags | admin | - |
@@ -1166,7 +1166,7 @@ Example:
 ]
 ```
 
-<h2 id="saveclientgroups">Save Client groups</h2>
+<h2 id="saveclientgroup">Save client group</h2>
 
 Save a ClientGroup. If it has an id it will update it, otherways it will create a new one.
 
@@ -1179,7 +1179,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveClientGroups \
+curl https://mt.golfmanager.es/api/saveClientGroup \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"John\",\"color\":\"#EEEEEE\"}"
