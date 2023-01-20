@@ -210,6 +210,10 @@ Creates a payment with amount zero when the lines being paid add up to zero.
 Value: true/false
 Makes expiration date a required field when sending payments by email
 
+**billing.addVoucherPaymentsInInvoice**
+Value: true/false
+Voucher payments are excluded when printing an invoice. Set this option to true to include them. 
+
 -----
 
 **eshop.thankyouPage**

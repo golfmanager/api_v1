@@ -140,6 +140,8 @@ To develop and test the API when developing locally, the developer needs to do t
 | [Delete activity](#deleteActivity) | POST | /deleteActivity | admin | - |
 | [Add client to activity](#addClientToActivity) | POST | /addClientToActivity | admin | - |
 | [Delete cliente from activity](#deleteClientFromActivity) | "POST" | /deleteClientFromActivity | admin | - |
+| [Get cash registers](#cashRegisters) | "GET" | /cashRegisters | admin | - |
+| [Get channels](#channels) | "GET" | /channels | admin | - |
 ---------------------------
 
 
@@ -152,7 +154,7 @@ Method: GET
 Example request
 
 ```
-$ curl -i https://mt.golfmanager.es/api/tenants \
+$ curl -i https://mt.golfmanager.app/api/tenants \
    -u user:key
 ```
 
@@ -196,7 +198,7 @@ List of valid tags:
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/searchAvailability \
+curl https://mt.golfmanager.app/api/searchAvailability \
  -u user:key \
  -d tenant=demo \
  -d start="2019-04-23T07:00:00" \
@@ -207,7 +209,7 @@ curl https://mt.golfmanager.es/api/searchAvailability \
 Example searching only for reservations that contain 9 or 18 holes:
 
 ```bash
-curl https://mt.golfmanager.es/api/searchAvailability \
+curl https://mt.golfmanager.app/api/searchAvailability \
  -u user:key \
  -d tenant=demo \
  -d start="2019-04-23T07:00:00" \
@@ -308,7 +310,7 @@ Arguments: optionally an array of tags to return only results containing those t
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/availabilityTypes \
+curl https://mt.golfmanager.app/api/availabilityTypes \
  -u user:key \
  -d tenant=demo
 ```
@@ -316,7 +318,7 @@ curl https://mt.golfmanager.es/api/availabilityTypes \
 Or filtering by tag:
 
 ```bash
-curl https://mt.golfmanager.es/api/availabilityTypes \
+curl https://mt.golfmanager.app/api/availabilityTypes \
  -u user:key \
  -d tenant=demo \
  -d tags=["18holes", "9holes"]
@@ -367,7 +369,7 @@ Methbod: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/extras \
+curl https://mt.golfmanager.app/api/extras \
  -u user:key \
  -d tenant=demo \
  -d start="2019-08-23T07:00:00"
@@ -440,7 +442,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/makeReservation \
+curl https://mt.golfmanager.app/api/makeReservation \
  -u user:key \
  -d tenant=demo \
  -d 'reservations=[{"idType":1,"start":"2018-11-09T10:00:00%2B02:00"}]'
@@ -512,7 +514,7 @@ A payment method with that name must already exist in the database or the API wi
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/confirmReservation \
+curl https://mt.golfmanager.app/api/confirmReservation \
  -u user:key \
  -d tenant=demo \
  -d 'ids=[234]'
@@ -538,7 +540,7 @@ Methbod: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/cancelReservation \
+curl https://mt.golfmanager.app/api/cancelReservation \
  -u user:key \
  -d tenant=demo \
  -d 'ids=[234]'
@@ -565,7 +567,7 @@ Methbod: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/sale \
+curl https://mt.golfmanager.app/api/sale \
  -u user:key \
  -d tenant=demo \
  -d 'id=34'
@@ -608,7 +610,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookings \
+curl https://mt.golfmanager.app/api/bookings \
  -u user:key \
  -d tenant=demo \
  -d start=2018-12-14T08:00:00%2B01:00 \
@@ -671,7 +673,7 @@ Methbod: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/tenant \
+curl https://mt.golfmanager.app/api/tenant \
  -d tenant=demo \
  -u user:key
 ```
@@ -721,7 +723,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/reservationtypes \
+curl https://mt.golfmanager.app/api/reservationtypes \
  -u user:key \
  -d tenant=demo
 ```
@@ -771,7 +773,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/resources \
+curl https://mt.golfmanager.app/api/resources \
  -u user:key \
  -d tenant=demo
 ```
@@ -821,7 +823,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/resources \
+curl https://mt.golfmanager.app/api/resources \
  -u user:key \
  -d tenant=demo
 ```
@@ -871,7 +873,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/teesheetRules \
+curl https://mt.golfmanager.app/api/teesheetRules \
  -u user:key \
  -d tenant=demo \
  -d start="2019-01-01T23:00:00.000Z" \
@@ -1084,7 +1086,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/reservations \
+curl https://mt.golfmanager.app/api/reservations \
  -u user:key \
  -d tenant=demo \
  -d start=2018-12-14T08:00:00%2B01:00 \
@@ -1148,7 +1150,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/clientGroups \
+curl https://mt.golfmanager.app/api/clientGroups \
  -u user:key \
  -d tenant=demo
 ```
@@ -1179,7 +1181,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveClientGroup \
+curl https://mt.golfmanager.app/api/saveClientGroup \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"John\",\"color\":\"#EEEEEE\"}"
@@ -1202,7 +1204,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveClient \
+curl https://mt.golfmanager.app/api/saveClient \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"John\",\"nationality\":\"ES\",\"gender\":1,\"idGroup\":40}"
@@ -1230,7 +1232,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/clientTags \
+curl https://mt.golfmanager.app/api/clientTags \
  -u user:key \
  -d tenant=demo
 ```
@@ -1260,7 +1262,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveTag \
+curl https://mt.golfmanager.app/api/saveTag \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"test123\"}"
@@ -1287,7 +1289,7 @@ Method: GET
 Example:
 
 ```bash
-curl -X GET https://mt.golfmanager.es/api/clients \
+curl -X GET https://mt.golfmanager.app/api/clients \
  -u user:key \
  -d tenant=demo \
  -d search=a \
@@ -1345,7 +1347,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/clientsFull -G \
+curl https://mt.golfmanager.app/api/clientsFull -G \
  -u user:key \
  -d tenant=demo \
  -d search=foo \
@@ -1395,7 +1397,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveClientTags \
+curl https://mt.golfmanager.app/api/saveClientTags \
  -u user:key \
  -d tenant=demo \
  -d idTags=[5, 15] \
@@ -1415,7 +1417,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/deleteClientTag \
+curl https://mt.golfmanager.app/api/deleteClientTag \
  -u user:key \
  -d tenant=demo \
  -d idTag=5 \
@@ -1447,7 +1449,7 @@ Available values for sellOnline:
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/products \
+curl https://mt.golfmanager.app/api/products \
  -u user:key \
  -d tenant=demo \
  -d search=a \
@@ -1492,7 +1494,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveProduct \
+curl https://mt.golfmanager.app/api/saveProduct \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"Name\",\"price\":\"1\",\"idSubfamily\":\"2\"}"
@@ -1513,7 +1515,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/families \
+curl https://mt.golfmanager.app/api/families \
  -u user:key \
  -d tenant=demo \
  -d search=a \
@@ -1555,7 +1557,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveFamily \
+curl https://mt.golfmanager.app/api/saveFamily \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"Greenfees\",\"code\":\"GF\"}"
@@ -1580,7 +1582,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/subfamilies \
+curl https://mt.golfmanager.app/api/subfamilies \
  -u user:key \
  -d tenant=demo \
  -d count=500
@@ -1627,7 +1629,7 @@ Method: POST
 Example to create a new one:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveSubfamily \
+curl https://mt.golfmanager.app/api/saveSubfamily \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"Greenfees\",\"idFamily\":\"2\"}"
@@ -1636,7 +1638,7 @@ curl https://mt.golfmanager.es/api/saveSubfamily \
 Example to update an existing subfamily:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveSubfamily \
+curl https://mt.golfmanager.app/api/saveSubfamily \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"New Name\",\"id\":\"23\"}"
@@ -1662,7 +1664,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/payments \
+curl https://mt.golfmanager.app/api/payments \
  -u user:key \
  -d tenant=demo \
  -d start=2020-08-29 \
@@ -1710,7 +1712,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/salelines \
+curl https://mt.golfmanager.app/api/salelines \
  -u user:key \
  -d tenant=demo \
  -d start=2020-08-29 \
@@ -1757,7 +1759,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/confirmSalelines \
+curl https://mt.golfmanager.app/api/confirmSalelines \
  -u user:key \
  -d tenant=demo \
 -d ids=[1,2]
@@ -1779,7 +1781,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/invoices \
+curl https://mt.golfmanager.app/api/invoices \
  -u user:key \
  -d tenant=demo \
  -d start=2020-08-29 \
@@ -1842,7 +1844,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/tickets \
+curl https://mt.golfmanager.app/api/tickets \
  -u user:key \
  -d tenant=demo \
  -d start=2020-08-29 \
@@ -1905,7 +1907,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/prices \
+curl https://mt.golfmanager.app/api/prices \
  -u user:key \
  -d tenant=demo
 ```
@@ -1956,7 +1958,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/savePrice \
+curl https://mt.golfmanager.app/api/savePrice \
  -u user:key \
  -d tenant=demo \
  -d data="{\"idProduct\":1,\"name\":\"Twilight\",\"price\":100,\"priority\":0,\"weekDays\":127}"
@@ -1980,7 +1982,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/deletePrices \
+curl https://mt.golfmanager.app/api/deletePrices \
  -u user:key \
  -d tenant=demo \
  -d idPrices=[1,2]
@@ -2020,7 +2022,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/newSale \
+curl https://mt.golfmanager.app/api/newSale \
  -u user:key \
  -d tenant=demo \
  -d idProduct=1 \
@@ -2070,7 +2072,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/createSale \
+curl https://mt.golfmanager.app/api/createSale \
  -u user:key \
  -d tenant=demo \
  -d salelines='[{ "idProduct": 1, "quantity": 2 }]' \
@@ -2116,7 +2118,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/cancelSales \
+curl https://mt.golfmanager.app/api/cancelSales \
  -u user:key \
  -d tenant=demo \
  -d idLines=[1,2]
@@ -2138,7 +2140,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/blockouts \
+curl https://mt.golfmanager.app/api/blockouts \
  -u user:key \
  -d tenant=demo
  -d idResource=2
@@ -2204,7 +2206,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/blockout \
+curl https://mt.golfmanager.app/api/blockout \
  -u user:key \
  -d tenant=demo \
  -d idResource=1 \
@@ -2248,7 +2250,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/cancelblockout \
+curl https://mt.golfmanager.app/api/cancelblockout \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2268,7 +2270,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/taxTypes \
+curl https://mt.golfmanager.app/api/taxTypes \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2287,7 +2289,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveTaxTypes \
+curl https://mt.golfmanager.app/api/saveTaxTypes \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"Name\",\"percent\":\"1\",\"code\":\"CO\",\"description\":\"My tax\"}"
@@ -2307,7 +2309,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/membership \
+curl https://mt.golfmanager.app/api/membership \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2326,7 +2328,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveMembership \
+curl https://mt.golfmanager.app/api/saveMembership \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Membership\",\"period\":\"1\",\"idProduct\":1}"
@@ -2370,7 +2372,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/membershipClient \
+curl https://mt.golfmanager.app/api/membershipClient \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2393,7 +2395,7 @@ NOTE: If you mark a membershipClient as paid, a new sale will be generated eithe
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saleMembership \
+curl https://mt.golfmanager.app/api/saleMembership \
  -u user:key \
  -d tenant=demo \
  -d data="{\"start\": \"2022-07-15T23:00:00Z\", \"description\": null, \"idBankAccount\": null, \"idClient\": 1, \"idMembership\": 1}"
@@ -2415,7 +2417,7 @@ Method: GET
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 ```bash
-curl https://mt.golfmanager.es/api/vouchers \
+curl https://mt.golfmanager.app/api/vouchers \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2434,7 +2436,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveVoucher \
+curl https://mt.golfmanager.app/api/saveVoucher \
  -u user:key \
  -d tenant=demo \
  -d data="{\"comments\":\"Comment\",\"remaining\":\"1\",\"unlimited\":1,\"weekdays\":1,\"online\":1}"
@@ -2454,7 +2456,7 @@ Method: GET
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 ```bash
-curl https://mt.golfmanager.es/api/voucherProducts \
+curl https://mt.golfmanager.app/api/voucherProducts \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2473,7 +2475,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveVoucherProduct \
+curl https://mt.golfmanager.app/api/saveVoucherProduct \
  -u user:key \
  -d tenant=demo \
  -d data="{\"idProduct\":\"324\",\"idType\":\"12\",\"ratio\":1}"
@@ -2495,7 +2497,7 @@ Method: GET
 | toDate   | date   | no       | Until this creation date |
 
 ```bash
-curl https://mt.golfmanager.es/api/voucherMovements \
+curl https://mt.golfmanager.app/api/voucherMovements \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2515,7 +2517,7 @@ Method: GET
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 ```bash
-curl https://mt.golfmanager.es/api/voucherRecharges \
+curl https://mt.golfmanager.app/api/voucherRecharges \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2534,7 +2536,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveVoucherRecharge \
+curl https://mt.golfmanager.app/api/saveVoucherRecharge \
  -u user:key \
  -d tenant=demo \
  -d data="{\"idVoucher\":\"324\",\"idVoucherMovement\":\"12\",\"amount\":1}"
@@ -2554,7 +2556,7 @@ Method: GET
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 ```bash
-curl https://mt.golfmanager.es/api/voucherTypes \
+curl https://mt.golfmanager.app/api/voucherTypes \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2578,7 +2580,7 @@ Allowed modes:
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveVoucherType \
+curl https://mt.golfmanager.app/api/saveVoucherType \
  -u user:key \
  -d tenant=demo \
  -d data="{\"idProduct\":\"324\",\"unlimited\":\"0\",\"amount\":1,\"name\":\"My Name\",\"mode\":\"1\"}"
@@ -2601,7 +2603,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/paymentMethods \
+curl https://mt.golfmanager.app/api/paymentMethods \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2620,7 +2622,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/savePaymentmethod \
+curl https://mt.golfmanager.app/api/savePaymentmethod \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"field\":\"1\",\"otherField\":1}"
@@ -2642,7 +2644,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/areas -G \
+curl https://mt.golfmanager.app/api/areas -G \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2661,7 +2663,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveArea \
+curl https://mt.golfmanager.app/api/saveArea \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"id\":\"1\"}"
@@ -2685,7 +2687,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsTypes -G \
+curl https://mt.golfmanager.app/api/bookingsTypes -G \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2704,7 +2706,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsType \
+curl https://mt.golfmanager.app/api/saveBookingsType \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"idResourceType\":\"1\"}"
@@ -2727,7 +2729,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsResourceTypes -G \
+curl https://mt.golfmanager.app/api/bookingsResourceTypes -G \
  -u user:key \
  -d tenant=demo \
  -d id=1
@@ -2746,7 +2748,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsResourceType \
+curl https://mt.golfmanager.app/api/saveBookingsResourceType \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"slots\":\"4\"}"
@@ -2768,7 +2770,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsIntervals -G \
+curl https://mt.golfmanager.app/api/bookingsIntervals -G \
  -u user:key \
  -d tenant=demo \
 ```
@@ -2786,7 +2788,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsInterval \
+curl https://mt.golfmanager.app/api/saveBookingsInterval \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"idResourceType\":\"1\",\"duration\":\"10\",\"priority\":\"1\",\"bgcolor\":\"#bac0ba\"}"
@@ -2808,7 +2810,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsView -G \
+curl https://mt.golfmanager.app/api/bookingsView -G \
  -u user:key \
  -d tenant=demo \
 ```
@@ -2826,7 +2828,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsView \
+curl https://mt.golfmanager.app/api/saveBookingsView \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"priority\":\"1\",\"pixelsPerMin\":\"1\",\"hourColumnInterval\":\"1\"}"
@@ -2847,7 +2849,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsConfig -G \
+curl https://mt.golfmanager.app/api/bookingsConfig -G \
  -u user:key \
  -d tenant=demo \
 ```
@@ -2865,7 +2867,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsConfig \
+curl https://mt.golfmanager.app/api/saveBookingsConfig \
  -u user:key \
  -d tenant=demo \
  -d data="{\"name\":\"My Name\",\"idClient\":1,\"idType\":1,\"maxReservationsPerDay\":1}"
@@ -2887,7 +2889,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/bookingsStock -G \
+curl https://mt.golfmanager.app/api/bookingsStock -G \
  -u user:key \
  -d tenant=demo \
 ```
@@ -2905,7 +2907,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsStock \
+curl https://mt.golfmanager.app/api/saveBookingsStock \
  -u user:key \
  -d tenant=demo \
  -d data="{\"idResourceType\":1,\"name\":\"My Name\",\"priority\":1,\"stock\":1,\"start\":\"1\"}"
@@ -2924,7 +2926,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveBookingsTypeTag \
+curl https://mt.golfmanager.app/api/saveBookingsTypeTag \
  -u user:key \
  -d tenant=demo \
  -d data="{\"idTag\":1,\"idTag\":1}"
@@ -2946,7 +2948,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/products \
+curl https://mt.golfmanager.app/api/products \
  -u user:key \
  -d tenant=demo \
 ```
@@ -2990,7 +2992,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveDeliveryNote \
+curl https://mt.golfmanager.app/api/saveDeliveryNote \
  -u user:key \
  -d tenant=demo \
  -d data='{"idWarehouse":1,"status":1,"date":"2022-09-09"}'
@@ -3015,7 +3017,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/deliverylines \
+curl https://mt.golfmanager.app/api/deliverylines \
  -u user:key \
  -d tenant=demo \
 ```
@@ -3057,7 +3059,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveDeliveryLine \
+curl https://mt.golfmanager.app/api/saveDeliveryLine \
  -u user:key \
  -d tenant=demo \
  -d data='{"idDelivery":110,"quantity":110,"received":4,"idProduct":1801,"netUnitCost":2}'
@@ -3082,7 +3084,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/blog/posts -G \
+curl https://mt.golfmanager.app/api/blog/posts -G \
  -u user:key \
  -d tenant=demo \
  -d search="my search"
@@ -3101,7 +3103,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/blog/posts -G \
+curl https://mt.golfmanager.app/api/blog/posts -G \
  -u user:key \
  -d tenant=demo \
  -d idSale=1
@@ -3120,7 +3122,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/saveActivity \
+curl https://mt.golfmanager.app/api/saveActivity \
  -u user:key \
  -d tenant=demo \
  -d data='{"name":"activity name","description":"activity description","start":"10/10/2022","idProduct":1801}'
@@ -3151,7 +3153,7 @@ Only activities created from the API can be deleted
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/deleteActivity \
+curl https://mt.golfmanager.app/api/deleteActivity \
  -u user:key \
  -d tenant=demo \
  -d id=325
@@ -3171,7 +3173,7 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/addClientToActivity \
+curl https://mt.golfmanager.app/api/addClientToActivity \
  -u user:key \
  -d tenant=demo \
  -d idClient=4274
@@ -3197,10 +3199,95 @@ Registration ID is the ID returned by addClientToActivity.
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/api/deleteClientFromActivity \
+curl https://mt.golfmanager.app/api/deleteClientFromActivity \
  -u user:key \
  -d tenant=demo \
  -d id=325
+```
+
+### cashRegisters
+
+List cash registers
+
+Method: GET
+
+| Argument   | Type   | Required | Description                                                 |
+| ---------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant     | string | yes      | Tenant name                                                 |
+| id         | int    | no       | Get cash register by id                                    |
+| offset     | int    | no       | The offset of the first row to be returned                  |
+| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/api/cashRegisters \
+ -u user:key \
+ -d tenant=demo \
+```
+
+Response:
+
+Return a list of delivery notes:
+
+| Argument | Type   | Description            |
+| -------- | ------ | ----------------       |
+| id       | int    | The cash register id   |
+| name     | string | The cash register name |
+
+Example:
+
+```json
+[
+  {
+    "id": 110,
+    "name": "Cash register test",
+    ...
+  }
+]
+```
+
+
+### channels
+
+List channels
+
+Method: GET
+
+| Argument   | Type   | Required | Description                                                 |
+| ---------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant     | string | yes      | Tenant name                                                 |
+| id         | int    | no       | Get cash register by id                                    |
+| offset     | int    | no       | The offset of the first row to be returned                  |
+| count      | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/api/channels \
+ -u user:key \
+ -d tenant=demo \
+```
+
+Response:
+
+Return a list of delivery notes:
+
+| Argument | Type   | Description      |
+| -------- | ------ | ---------------- |
+| id       | int    | The channel id   |
+| name     | string | The channel name |
+
+Example:
+
+```json
+[
+  {
+    "id": 110,
+    "name": "Channel test",
+    ...
+  }
+]
 ```
 
 
