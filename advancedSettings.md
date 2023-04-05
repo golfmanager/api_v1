@@ -249,6 +249,10 @@ Show discount reasons when applying a discount
 Value: string
 The full URL including protocol and port where the printing jobs will be sent to
 
+**pos.tipFromNet**
+Value: true/false
+Tips from POS buttons are calculated based on net amount instead of total amount
+
 -----
 
 **school.filterClassTypeByTeacher**

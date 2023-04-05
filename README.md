@@ -1337,6 +1337,7 @@ Method: GET
 | email           | string | no       | Search clients by email (exact match)                       |
 | phone           | string | no       | Search clients by phone (exact match)                       |
 | search          | string | no       | Search clients by name (contains)                           |
+| idGroup         | number | no       | Search clients by group id (exact match)                    |
 | centerCard      | string | no       | Search clients by center card (exact match)                 |
 | memberCode      | string | no       | Search clients by member code (exact match)                 |
 | updateDateStart | date   | no       | Search clients modified after this date                     |
