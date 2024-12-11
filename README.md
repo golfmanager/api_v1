@@ -63,7 +63,7 @@ To develop and test the API when developing locally, the developer needs to do t
 | [Save Resources](#saveResources) | POST | /saveResources | admin | bookings |
 | [Make reservations](#makereservations) | POST | /makeReservation | consumer | bookings |
 | [Confirm reservations](#confirmreservations) | POST | /confirmReservation | consumer | bookings |
-| [Cancel reservations](#cancelreservations) | POST | /confirmReservation | consumer | bookings |
+| [Cancel reservations](#cancelreservations) | POST | /cancelreservations | consumer | bookings |
 | [Sale information](#saleinfo) | GET | /sale | consumer | bookings |
 | [Bookings](#bookings) | GET | /bookings | consumer | bookings |
 | [Reservation types](#reservationtypes) | GET | /reservationtypes | admin | - |
@@ -74,6 +74,8 @@ To develop and test the API when developing locally, the developer needs to do t
 | [Save client](#SaveClient) | POST | /saveClient | admin | - |
 | [ClientGroups](#clientgroups) | GET | /clientGroups| admin | - |
 | [Save ClientGroups](#saveclientgroup) | GET | /saveClientGroup | admin | - |
+| [Promo Codes](#promocodes) | GET | /promoCodes| admin | - |
+| [Save Promo Code](#savepromocode) | POST | /savePromoCode | admin | - |
 | [Client tags](#clientTags) | GET | /clientTags | admin | - |
 | [Save tag](#savetag) | POST | /saveTag | admin | - |
 | [Save client tags](#saveclienttags) | GET | /saveClientTags | admin | - |
@@ -1190,6 +1192,65 @@ curl https://mt.golfmanager.app/api/saveClientGroup \
 Response:
 
 The ID of the modified or created resource.
+
+<h2 id="promocodes">Promo Codes</h2>
+
+List promo codes
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+| -------- | ------ | -------- | ----------------------------------------------------------- |
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/api/promoCodes \
+ -u user:key \
+ -d tenant=demo
+```
+
+Response:
+
+Example:
+
+```json
+[
+    {
+        "id": 1,
+        "code": "Test code",
+        "idProduct": 5,
+        "price": 10,
+        ...
+    }
+]
+```
+
+<h2 id="savepromocode">Save promo code</h2>
+
+Save a promo code. If it has an id it will update it, otherways it will create a new one.
+
+Method: POST
+
+| Argument | Type | Required | Description        |
+| -------- | ---- | -------- | ------------------ |
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/api/savePromoCode \
+ -u user:key \
+ -d tenant=demo \
+ -d data="{\"code\":\"Test code\",\"idProduct\":5,\"price\":10}"
+```
+
+Response:
+
+The ID of the modified or created promo code.
 
 ### SaveClient
 

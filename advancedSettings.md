@@ -84,11 +84,19 @@ Include crossovers in templates
 Value: true/false
 Don't auto confirm reservations with price zero.
 
+**bookings.avoidInseparables**
+Value: true/false
+Don't create bookings related salelines as inseparables
+
 -----
 
 **contacts.insertIdAsCenterCard**
 Value: true/false
 When creating a client, set the Center Card with the same value as the ID
+
+**contacts.showEmailInLookup**
+Value: true/false
+Show client's email in search field when creating reservations
 
 -----
 
@@ -98,9 +106,9 @@ Plugin: consumer
 Show the bookings view in membership mode.
 
 **ebookings.membershipModeGroup**
-Value: Client group ID
+Value: Client group IDs separated by commas
 Plugin: consumer
-Only clients from this group will have their names displayed in /consumer
+Only clients from these groups will have their names displayed in /consumer
 
 **ebookings.showPastHours**
 Value: true/false
@@ -226,6 +234,11 @@ Value: true/false
 Plugin: slib
 Public: true
 Select rows all rows int the page versus all rows in the search.
+
+**eshop.requireAnonymousPhone**
+Value: true/false
+Plugin: consumer
+Require a phone when paying as an anonymous client
 
 -----
 
